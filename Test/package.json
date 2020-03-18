@@ -1,0 +1,17 @@
+{
+  "name": "Test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tempTest.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "global": "^4.4.0",
+    "mocha": "^7.0.1",
+    "readline-sync": "^1.4.10"
+  },
+  "scripts": {
+    "test": "mocha"
+  }
+}
