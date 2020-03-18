@@ -8,16 +8,16 @@ describe("This is test code for gambler program", () => {
         assert.equal(callFunction.gambling(1500, 2000, 20));
     });
     it("givenInputs_whenChecked_shouldReturnEqual 3", () => {
-        assert.equal(callFunction.gambling());
+        assert.equal(callFunction.gambling());   //empty
     });
     it("givenInputs_whenChecked_shouldReturnEqual 4", () => {
-        assert.false(callFunction.gambling(150, notdefined));
+        assert.notDeepEqual(callFunction.gambling(150, -520)); //not defined
     });
     it("givenInputs_whenChecked_shouldReturnEqual 5", () => {
-        assert.equal(callFunction.gambling(null))
+        assert.equal(callFunction.gambling(null))   //null value
     });
     it("givenInputs_whenChecked_shouldReturnEqual 6", () => {
-        assert.equal(callFunction.gambling(2000, null, not))
+        assert.doesNotThrow(callFunction.gambling(2000, null, not)) //null and not defined
     });
     it("givenInputs_whenChecked_shouldReturnEqual 7", () => {
         assert.equal(callFunction.gambling(2000, 1500, 20))
