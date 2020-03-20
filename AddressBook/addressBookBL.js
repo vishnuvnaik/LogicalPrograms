@@ -27,7 +27,6 @@ class AddressBookFunction extends Person {
             let firstName = input.question('enter the name first ')
             while (nameRestriction.test(firstName) == false) {
                 firstName = read.question("No special characters Invalid name! :");
-
             }
             let lastName = input.question('  enter the last name ')
             while (nameRestriction.test(lastName) == false) {
