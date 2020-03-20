@@ -1,7 +1,7 @@
 //const fs = require('fs').promises
 const fs = require('fs')
 const input = require('readline-sync')
-nameRestriction = /[A-z]/g;
+nameRestriction = /[A-z]/g; //for input validation
 contactRestriction = /[0-9]/g;
 class Person {
     constructor() {
