@@ -60,7 +60,7 @@ class AddressBookFunction extends Person {
             let newObj = new Person(id, firstName, lastName, address, city, state, zip, mob)
             //this.jsonDataa.Person.push(JSON.parse(JSON.stringify(newObj)));
             //fs.writeFileSync('address.json', JSON.stringify(this.jsonDataa));
-            async () => {
+            async () => { //async await for writing data to json file 
                 this.jsonDataa.Person.push(JSON.parse(JSON.stringify(newObj)));
                 await fs.writeFile('address.json', JSON.stringify(this.jsonDataa));
             }
