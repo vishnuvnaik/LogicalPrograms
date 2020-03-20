@@ -1,3 +1,8 @@
+/**
+* @description : Address Book generation 
+* @param {}
+* @return Displays the address book   
+**/
 //const fs = require('fs').promises
 const fs = require('fs')
 const input = require('readline-sync')
@@ -120,22 +125,23 @@ class AddressBookFunction extends Person {
     }
     sortByName() {
         try {
-            for (let i = 1; i < this.jsonDataa.person.length; i++) {
+            let temp = 0;
+            for (let i = 1; i < this.jsonDataa.Person.length; i++) {
                 let j = i - 1;
-                while (j >= 0 && this.jsonDataa.person[j].firstName > temp.firstName) {
-                    this.jsonDataa.person[j + 1] = this.jsonDataa.person[j];
+                while (j >= 0 && this.jsonDataa.Person[j].firstName > temp.firstName) {
+                    this.jsonDataa.Person[j + 1] = this.jsonDataa.Person[j];
                     j--;
                 }
-                this.jsonDataa.person[j + 1] = temp;
+                this.jsonDataa.Person[j + 1] = temp;
             }
-            console.log('Data sorted Successfully BY Name.');
+            console.log('Data sorted Successfully by Name.');
             fs.writeFileSync('address.json', JSON.stringify(this.jsonDataa));
         }
         catch (err) {
             console.log(err);
         }
     }
-    get printAddressBook() {
+    printAddressBook = () => {
         try {
             for (let x in this.jsonDataa.Person) {
                 for (let inner_x in this.jsonDataa.Person[x]) {
@@ -144,7 +150,6 @@ class AddressBookFunction extends Person {
                 console.log();
             }
         }
-
         catch (err) {
             console.log(err);
         }
