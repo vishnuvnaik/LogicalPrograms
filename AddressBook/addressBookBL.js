@@ -123,7 +123,7 @@ class AddressBookFunction extends Person {
         }
         fs.writeFileSync('address.json', JSON.stringify(this.jsonDataa));
     }
-    sortByName() {
+    sortByName = () => {
         try {
             let temp = 0;
             for (let i = 1; i < this.jsonDataa.Person.length; i++) {
