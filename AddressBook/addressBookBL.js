@@ -21,8 +21,6 @@ class Person {
 }
 class AddressBookFunction extends Person { //inheritance implementation
     addData = () => { //function to add data 
-        //try{
-
         const id = input.questionInt(' enter the id no ') //enter datas
         const firstName = input.question('enter the first name')
         if (nameRestriction.test(firstName) === false) { //input validation of name 
@@ -45,28 +43,17 @@ class AddressBookFunction extends Person { //inheritance implementation
             state = read.question(" No special characters city! :");
         }
         const zip = input.questionInt('enter the zip code ')
-        // if (contactRestriction.test(zip) === false || zip.length != 6) { //input validation of zip
-        //     zip = input.question("Enter the zip code 6 digits only : ");
-        // }
+        if (contactRestriction.test(zip) === false || zip.length != 6) { //input validation of zip
+            zip = input.question("Enter the zip code 6 digits only : ");
+        }
         const mob = input.questionInt('enter the mobile number ')
-        // if (contactRestriction.test(zip) === false || mob.length != 10) { //input validation of mobile number
-        //     mob = read.question("Enter the mod num 10 digits only : ");
-        // }
+        if (contactRestriction.test(zip) === false || mob.length != 10) { //input validation of mobile number
+            mob = read.question("Enter the mod num 10 digits only : ");
+        }
         let newObj = new Person(id, firstName, lastName, address, city, state, zip, mob)
-        //this.jsonDataa.Person.push(JSON.parse(JSON.stringify(newObj)));
-        //fs.writeFileSync('address.json', JSON.stringify(this.jsonDataa));
-        // async () => { //async await for writing data to json file 
         this.jsonDataa.Person.push(JSON.parse(JSON.stringify(newObj)));
         fs.writeFileSync('address.json', JSON.stringify(this.jsonDataa));
-        //}
-        //}
-        //     await fs.writeFile('address.json', JSON.stringify(this.jsonDataa));
-        // }
         console.log('entry added ')
-
-        // catch (err) {
-        //  console.log(Error)
-        // }
     }
     removeEntry = () => { //function to remove data
         try {
@@ -94,33 +81,32 @@ class AddressBookFunction extends Person { //inheritance implementation
         }
     }
     editEntry = (editID) => { //function to edit data
-        let isAvailable = false;
-        for (let i = 0; i < this.jsonDataa.Person.length; i++) {
-            if (this.jsonDataa.Person[i].id === editID) {
-                let editAddress = input.question(' enter the new address ')
-                let editCity = input.question(' enter the new city ')
-                let editZip = input.questionInt(' enter the new zip ')
-                let editMob = input.questionInt('enter the new mobile number')
-                this.jsonDataa.Person[i].address = editAddress;
-                this.jsonDataa.Person[i].city = editCity;
-                this.jsonDataa.Person[i].zip = editZip;
-                this.jsonDataa.Person[i].mob = editMob;
-                isAvailable = true;
+        try {
+            let isAvailable = false;
+            for (let i = 0; i < this.jsonDataa.Person.length; i++) {
+                if (this.jsonDataa.Person[i].id === editID) {
+                    let editAddress = input.question(' enter the new address ')
+                    let editCity = input.question(' enter the new city ')
+                    let editZip = input.questionInt(' enter the new zip ')
+                    let editMob = input.questionInt('enter the new mobile number')
+                    this.jsonDataa.Person[i].address = editAddress;
+                    this.jsonDataa.Person[i].city = editCity;
+                    this.jsonDataa.Person[i].zip = editZip;
+                    this.jsonDataa.Person[i].mob = editMob;
+                    isAvailable = true;
+                }
             }
+            if (isAvailable == true) {
+                console.log(" edited ")
+            }
+            else {
+                console.log("entry not found ")
+            }
+            fs.writeFileSync('addressBook.json', JSON.stringify(this.jsonBookData));
         }
-        if (isAvailable == true) {
-            console.log(" edited ")
+        catch (err) {
+            console.log(Error)
         }
-        else {
-            console.log("entry not found ")
-        }
-        fs.writeFileSync('addressBook.json', JSON.stringify(this.jsonBookData));
-        //     async () => { //async await for writing data to json file 
-        //         this.jsonDataa.Person.push(JSON.parseJSON(stringify(newObj)));
-        //         await fs.writeFile('address.json', parseJSON(stringify(this.jsonDataa)));
-        //     }
-        // }
-
     }
 
     sortByName() {
