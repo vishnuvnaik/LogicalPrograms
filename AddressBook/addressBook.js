@@ -2,15 +2,16 @@
  * @Execution : default node : cmd> addressBook.js
  * @Purpose : To store and display address book
  * @description : Add Edit remove sort and print addresbook entries stored in the JSON file
- * @overview : Address Book problem
+ * @overview : Address Book problema
  * @author : Vishnu V Dev <vishnuvdev17@gmail.com>
  * @version : 1.0
  * @since : February 18 2020
  ****************************************************************/
+//node --inspect-brk addressBook.js
 const path = require('./addressBookBL');
 // var fs = require('fs').promises;
 let input = require('readline-sync')
-const fs = require('fs').promises
+let fs = require('fs').promises
 async () => {
     const jsonData = await fs.readFile('address.json');
     this.jsonDataa = JSON.parse(jsonData);

@@ -4,21 +4,21 @@
             "id": 1021,
             "firstName": "Hari",
             "lastName": "Prabhu",
-            "Address": "chla",
-            "City": "abcd",
-            "State": "Kerala",
-            "Zip": 560010,
-            "Mob": 9567123400
+            "address": "chla",
+            "city": "abcd",
+            "state": "Kerala",
+            "zip": 560010,
+            "mob": 9567123400
         },
         {
             "id": 1031,
             "firstName": "Anilu",
-            "lastName": "Set",
-            "Address": "ctla",
-            "City": "abcde",
-            "State": "Karnataka",
-            "Zip": 688523,
-            "Mob": 9567856700
+            "lastName": "Settayi",
+            "address": "ctla",
+            "city": "abcde",
+            "state": "Karnataka",
+            "zip": 688523,
+            "mob": 9567856700
         }
     ]
 }

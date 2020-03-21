@@ -5,6 +5,7 @@
 **/
 //const fs = require('fs').promises
 const fs = require('fs')
+const parseJSON = require('json-parse-async')
 const input = require('readline-sync')
 nameRestriction = /[A-z]/g; //for input validation
 contactRestriction = /[0-9]/g;
@@ -29,7 +30,7 @@ class AddressBookFunction extends Person {
         try {
 
             let id = input.questionInt(' enter the id no ')
-            let firstName = input.question('enter the name first ')
+            let firstName = input.question('enter the first name')
             while (nameRestriction.test(firstName) == false) {
                 firstName = read.question("No special characters Invalid name! :");
             }
@@ -40,12 +41,12 @@ class AddressBookFunction extends Person {
             }
             let address = input.question('enter the address')
             while (nameRestriction.test(address) == false) {
-                address = read.question(" No special characters address! :");
+                address = input.question(" No special characters address! :");
 
             }
             let city = input.question('enter the city ')
             while (nameRestriction.test(city) == false) {
-                city = read.question(" No special characters city! :");
+                city = input.question(" No special characters city! :");
 
             }
             let state = input.question('enter the state')
@@ -55,18 +56,18 @@ class AddressBookFunction extends Person {
             }
             let zip = input.questionInt('enter the zip code ')
             while (contactRestriction.test(zip) == false || zip.length != 6) {
-                zip = read.question("Enter the zip code 6 digits only : ");
+                zip = input.question("Enter the zip code 6 digits only : ");
             }
             let mob = input.questionInt('enter the mobile number ')
             while (contactRestriction.test(zip) == false || mob.length != 10) {
-                mob = read.question("Enter the zip code 10 digits only : ");
+                mob = read.question("Enter the mod num 10 digits only : ");
             }
             let newObj = new Person(id, firstName, lastName, address, city, state, zip, mob)
             //this.jsonDataa.Person.push(JSON.parse(JSON.stringify(newObj)));
             //fs.writeFileSync('address.json', JSON.stringify(this.jsonDataa));
             async () => { //async await for writing data to json file 
-                this.jsonDataa.Person.push(JSON.parse(JSON.stringify(newObj)));
-                await fs.writeFile('address.json', JSON.stringify(this.jsonDataa));
+                this.jsonDataa.Person.push(JSON.parseJSON(stringify(newObj)));
+                await fs.writeFile('address.json', parseJSON(stringify(this.jsonDataa)));
             }
             //     await fs.writeFile('address.json', JSON.stringify(this.jsonDataa));
             // }
