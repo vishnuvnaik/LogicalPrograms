@@ -3,12 +3,11 @@
 * @param {}
 * @return Displays the address book   
 **/
-//const fs = require('fs').promises
 const fs = require('fs')
 const parseJSON = require('json-parse-async')
 const input = require('readline-sync')
-nameRestriction = /[A-z]/g; //for input validation
-contactRestriction = /[0-9]/g;
+nameRestriction = /[A-z]/g; //for input validation of string
+contactRestriction = /[0-9]/g; //for input validation of numbers
 class Person {
     constructor() {
         this.id = this.id;
@@ -20,32 +19,32 @@ class Person {
         this.zip = this.zip;
         this.mob = this.mob;
         async () => {
-            const jsonData = await fs.readFile('address.json');
+            const jsonData = await fs.readFile('address.json'); //async await to read file 
             this.jsonDataa = JSON.parse(jsonData);
         }
     }
 }
-class AddressBookFunction extends Person {
-    addData = () => {
+class AddressBookFunction extends Person { //inheritance implementation
+    addData = () => { //function to add data 
         try {
 
-            let id = input.questionInt(' enter the id no ')
+            let id = input.questionInt(' enter the id no ') //enter datas
             let firstName = input.question('enter the first name')
-            while (nameRestriction.test(firstName) == false) {
+            while (nameRestriction.test(firstName) == false) { //input validation of name 
                 firstName = read.question("No special characters Invalid name! :");
             }
             let lastName = input.question('  enter the last name ')
-            while (nameRestriction.test(lastName) == false) {
+            while (nameRestriction.test(lastName) == false) { //input validation
                 lastName = read.question("No special characters Invalid name! :");
 
             }
             let address = input.question('enter the address')
-            while (nameRestriction.test(address) == false) {
+            while (nameRestriction.test(address) == false) { //input validation of address 
                 address = input.question(" No special characters address! :");
 
             }
             let city = input.question('enter the city ')
-            while (nameRestriction.test(city) == false) {
+            while (nameRestriction.test(city) == false) { //input validation of city
                 city = input.question(" No special characters city! :");
 
             }
@@ -55,11 +54,11 @@ class AddressBookFunction extends Person {
 
             }
             let zip = input.questionInt('enter the zip code ')
-            while (contactRestriction.test(zip) == false || zip.length != 6) {
+            while (contactRestriction.test(zip) == false || zip.length != 6) { //input validation of zip
                 zip = input.question("Enter the zip code 6 digits only : ");
             }
             let mob = input.questionInt('enter the mobile number ')
-            while (contactRestriction.test(zip) == false || mob.length != 10) {
+            while (contactRestriction.test(zip) == false || mob.length != 10) { //input validation of mobile number
                 mob = read.question("Enter the mod num 10 digits only : ");
             }
             let newObj = new Person(id, firstName, lastName, address, city, state, zip, mob)
@@ -77,11 +76,11 @@ class AddressBookFunction extends Person {
             console.log(Error)
         }
     }
-    removeEntry = () => {
+    removeEntry = () => { //function to remove data
 
-        let deleteID = input.questionInt('enter the delete id ')
+        let deleteID = input.questionInt('enter the delete id ') //id to remove 
         let isAvailable = true;
-        for (let i = 0; i < this.jsonDataa.Person.length; i++) {
+        for (let i = 0; i < this.jsonDataa.Person.length; i++) { //loop to find the id and remove
             if (this.jsonDataa.Person[i].id === deleteID) {
                 this.jsonDataa.Person.splice(i, 1);
             }
@@ -100,9 +99,13 @@ class AddressBookFunction extends Person {
         //     this.jsonDataa.Person.push(JSON.parse(JSON.stringify(newObj)));
         //     await fs.writeFile('address.json', JSON.stringify(this.jsonDataa));
         // }
-        fs.writeFileSync('address.json', JSON.stringify(this.jsonDataa));
+        //fs.writeFileSync('address.json', JSON.stringify(this.jsonDataa));
+        async () => { //async await for writing data to json file 
+            this.jsonDataa.Person.push(JSON.parseJSON(stringify(newObj)));
+            await fs.writeFile('address.json', parseJSON(stringify(this.jsonDataa)));
+        }
     }
-    set editEntry(editID) {
+    editEntry(editID) { //function to edit data
 
         let isAvailable = false;
         editID = input.questionInt('enter the id to edit')
@@ -122,27 +125,38 @@ class AddressBookFunction extends Person {
         if (isAvailable == true) {
             console.log(" edited ")
         }
-        fs.writeFileSync('address.json', JSON.stringify(this.jsonDataa));
+        else {
+            console.log("entry not found ")
+        }
+        //fs.writeFileSync('address.json', JSON.stringify(this.jsonDataa));
+        async () => { //async await for writing data to json file 
+            this.jsonDataa.Person.push(JSON.parseJSON(stringify(newObj)));
+            await fs.writeFile('address.json', parseJSON(stringify(this.jsonDataa)));
+        }
     }
-    sortByName = () => {
+    sortByName = () => { //function to sort according to name 
         try {
             let temp = 0;
             for (let i = 1; i < this.jsonDataa.Person.length; i++) {
                 let j = i - 1;
-                while (j >= 0 && this.jsonDataa.Person[j].firstName > temp.firstName) {
+                while (j >= 0 && this.jsonDataa.Person[j].firstName > temp.firstName) { //
                     this.jsonDataa.Person[j + 1] = this.jsonDataa.Person[j];
                     j--;
                 }
                 this.jsonDataa.Person[j + 1] = temp;
             }
             console.log('Data sorted Successfully by Name.');
-            fs.writeFileSync('address.json', JSON.stringify(this.jsonDataa));
+            //fs.writeFileSync('address.json', JSON.stringify(this.jsonDataa));
+            async () => { //async await for writing data to json file 
+                this.jsonDataa.Person.push(JSON.parseJSON(stringify(newObj)));
+                await fs.writeFile('address.json', parseJSON(stringify(this.jsonDataa)));
+            }
         }
         catch (err) {
             console.log(err);
         }
     }
-    printAddressBook = () => {
+    printAddressBook = () => { //function to print the address book
         try {
             for (let x in this.jsonDataa.Person) {
                 for (let inner_x in this.jsonDataa.Person[x]) {
