@@ -40,19 +40,21 @@ class AddressBookFunction extends Person { //inheritance implementation
         }
         let state = input.question('enter the state')
         if (nameRestriction.test(state) === false) {
-            state = read.question(" No special characters city! :");
+            state = input.question(" No special characters city! :");
         }
-        const zip = input.questionInt('enter the zip code ')
+        let zip = input.questionInt('enter the zip code ')
         if (contactRestriction.test(zip) === false || zip.length != 6) { //input validation of zip
             zip = input.question("Enter the zip code 6 digits only : ");
         }
-        const mob = input.questionInt('enter the mobile number ')
+        let mob = input.questionInt('enter the mobile number ')
         if (contactRestriction.test(zip) === false || mob.length != 10) { //input validation of mobile number
-            mob = read.question("Enter the mod num 10 digits only : ");
+            mob = input.question("Enter the mod num 10 digits only : ");
         }
         let newObj = new Person(id, firstName, lastName, address, city, state, zip, mob)
-        this.jsonDataa.Person.push(JSON.parse(JSON.stringify(newObj)));
-        fs.writeFileSync('address.json', JSON.stringify(this.jsonDataa));
+        async () => {
+            this.jsonDataa.Person.push(JSON.parse(JSON.stringify(newObj)));
+            await fs.writeFileSync('address.json', JSON.stringify(this.jsonDataa));
+        }
         console.log('entry added ')
     }
     removeEntry = () => { //function to remove data
@@ -108,7 +110,6 @@ class AddressBookFunction extends Person { //inheritance implementation
             console.log(Error)
         }
     }
-
     sortByName() {
         for (let i = 0; i < this.jsonDataa.Person.length; i++) {
             for (let j = 0; j < this.jsonDataa.Person.length - 1; j++) {
