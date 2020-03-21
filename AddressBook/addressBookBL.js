@@ -87,15 +87,7 @@ class AddressBookFunction extends Person { //inheritance implementation
                 console.log('entry not found')
                 return;
             }
-            // async () => {
-            //     this.jsonDataa.Person.push(JSON.parse(JSON.stringify(newObj)));
-            //     await fs.writeFile('address.json', JSON.stringify(this.jsonDataa));
-            // }
-            //fs.writeFileSync('address.json', JSON.stringify(this.jsonDataa));
-            //async () => {
             fs.writeFileSync('address.json', JSON.stringify(this.jsonDataa));
-            //fs.writeFileSync('addressBook.json', JSON.stringify(this.jsonBookData));
-            //}
         }
         catch (err) {
             console.log(error)
@@ -130,27 +122,20 @@ class AddressBookFunction extends Person { //inheritance implementation
         // }
 
     }
-    sortByName = () => { //function to sort according to name 
-        try {
-            let temp = 0;
-            for (let i = 1; i < this.jsonDataa.Person.length; i++) {
-                let j = i - 1;
-                while (j >= 0 && this.jsonDataa.Person[j].firstName > temp.firstName) { //
+
+    sortByName() {
+        for (let i = 0; i < this.jsonDataa.Person.length; i++) {
+            for (let j = 0; j < this.jsonDataa.Person.length - 1; j++) {
+                if (this.jsonDataa.Person[j].firstName > this.jsonDataa.Person[j + 1].firstName) {
+                    let temp = this.jsonDataa.Person[j + 1];
                     this.jsonDataa.Person[j + 1] = this.jsonDataa.Person[j];
-                    j--;
+                    this.jsonDataa.Person[j] = temp;
                 }
-                this.jsonDataa.Person[j + 1] = temp;
             }
-            console.log('Data sorted Successfully by Name.');
-            fs.writeFileSync('address.json', JSON.stringify(this.jsonDataa));
-            // async () => { //async await for writing data to json file 
-            //     this.jsonDataa.Person.push(JSON.parseJSON(stringify(newObj)));
-            //     await fs.writeFile('address.json', parseJSON(stringify(this.jsonDataa)));
-            // }
         }
-        catch (err) {
-            console.log(err);
-        }
+        // console.log(this.entries.person);
+        console.log('Data sorted Successfully by Name.');
+        fs.writeFileSync('address.json', JSON.stringify(this.jsonDataa));
     }
     printAddressBook = () => { //function to print the address
         try {
