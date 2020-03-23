@@ -47,13 +47,13 @@ class AddressBookFunction extends Person { //inheritance implementation
             zip = input.question("Enter the zip code 6 digits only : ");
         }
         let mob = input.questionInt('enter the mobile number ')
-        if (contactRestriction.test(zip) === false || mob.length != 10) { //input validation of mobile number
+        if (contactRestriction.test(mob) === false || mob.length != 10) { //input validation of mobile number
             mob = input.question("Enter the mod num 10 digits only : ");
         }
         let newObj = new Person(id, firstName, lastName, address, city, state, zip, mob)
         async () => {
             this.jsonDataa.Person.push(JSON.parse(JSON.stringify(newObj)));
-            await fs.writeFileSync('address.json', JSON.stringify(this.jsonDataa));
+            await fs.writeFile('address.json', JSON.stringify(this.jsonDataa));
         }
         console.log('entry added ')
     }
