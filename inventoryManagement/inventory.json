@@ -1,0 +1,24 @@
+{
+    "Rice": [
+        {
+            "riceName" : "whiterice",
+            "weight" : "25",
+            "pricePerKg" : "50"
+        },
+        {
+            "riceName" : "whiterice",
+            "weight" : "25",
+            "pricePerKg" : "50"
+        },
+        {
+            "riceName" : "whiterice",
+            "weight" : "25",
+            "pricePerKg" : "50"
+        }
+    ],
+    "Wheat":[
+        {
+            
+        }
+    ]
+}
