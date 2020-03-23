@@ -29,11 +29,12 @@ try {
             addBook.addData();
             break;
         case 2:
-            addBook.removeEntry();
+            let deleteID = input.questionInt('enter the delete id ') //id to remove
+            addBook.removeEntry(deleteID);
             break;
         case 3:
             let editID = input.questionInt('enter the id to edit')
-            addBook.editEntry = editID;
+            addBook.editEntry(editID);
             break;
         case 4:
             addBook.sortByName();
