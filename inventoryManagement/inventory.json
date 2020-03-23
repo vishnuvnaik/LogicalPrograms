@@ -1,5 +1,5 @@
 {
-    "Rice": [
+    "rice": [
         {
             "riceName": "whiterice",
             "weight": 25,
@@ -14,9 +14,14 @@
             "riceName": "brownrice",
             "weight": 50,
             "pricePerKg": 70
+        },
+        {
+            "riceName": "Basumati",
+            "weight": "42",
+            "pricePerKg": "7"
         }
     ],
-    "Wheat": [
+    "wheat": [
         {
             "wheatName": "Punjabi",
             "weight": 28,
@@ -33,7 +38,7 @@
             "pricePerKg": 58
         }
     ],
-    "Pulses": [
+    "pulses": [
         {
             "pulsesName": "toordaal",
             "weight": 40,
