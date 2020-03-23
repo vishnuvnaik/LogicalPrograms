@@ -42,7 +42,7 @@ try {
             addBook.printAddressBook();
             break;
         case 6:
-
+            process.exit(0);
         default:
             console.log("invalid");
     }
