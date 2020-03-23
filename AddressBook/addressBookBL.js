@@ -6,7 +6,8 @@
 const fs = require('fs')
 const input = require('readline-sync')
 nameRestriction = /[A-z]/g; //for input validation of string
-contactRestriction = /[0-9]/g; //for input validation of numbers
+contactRestriction = /[0-9]{6}/g;
+mobRes = /[0-9]{10}/g;   //for input validation of numbers
 
 class Person {
     constructor(id, firstName, lastName, address, city, state, zip, mob) {
@@ -18,42 +19,47 @@ class Person {
         this.state = state;
         this.zip = zip;
         this.mob = mob;
+        let jsonData = fs.readFileSync('address.json');
+        this.jsonDataa = JSON.parse(jsonData);
     }
 }
 
-class AddressBookFunction extends Person { //inheritance implementation
+class AddressBook extends Person { //inheritance implementation
+    constructor(id, firstName, lastName, address, city, state, zip, mob) {
+        super(id, firstName, lastName, address, city, state, zip, mob)
+    }
     addData = async () => { //function to add data 
         try {
-            const id = input.questionInt(' enter the id no ') //enter datas
-            const firstName = input.question('enter the first name')
-            if (nameRestriction.test(firstName) === false) { //input validation of name 
-                firstName = read.question("No special characters Invalid name! :");
+            this.id = input.questionInt(' enter the id no '); //enter datas
+            this.firstName = input.question('enter the first name')
+            if (!nameRestriction.test(this.firstName)) { //input validation of name 
+                this.firstName = read.question("No special characters Invalid name! :");
             }
-            const lastName = input.question('  enter the last name ')
-            if (nameRestriction.test(lastName) === false) { //input validation
-                lastName = read.question("No special characters Invalid name! :");
+            this.lastName = input.question('  enter the last name ')
+            if (!nameRestriction.test(this.lastName)) { //input validation
+                this.lastName = read.question("No special characters Invalid name! :");
             }
-            let address = input.question('enter the address')
-            if (nameRestriction.test(address) === false) { //input validation of address 
-                address = input.question(" No special characters address! :");
+            this.address = input.question('enter the address')
+            if (!nameRestriction.test(this.address)) { //input validation of address 
+                this.address = input.question(" No special characters address! :");
             }
-            let city = input.question('enter the city ')
-            if (!nameRestriction.test(city) === false) { //input validation of city
-                city = input.question(" No special characters city! :");
+            this.city = input.question('enter the city ')
+            if (!nameRestriction.test(this.city)) { //input validation of city
+                this.city = input.question(" No special characters city! :");
             }
-            let state = input.question('enter the state')
-            if (!nameRestriction.test(state)) {
-                state = input.question(" No special characters city! :");
+            this.state = input.question('enter the state')
+            if (!nameRestriction.test(this.state)) {
+                this.state = input.question(" No special characters city! :");
             }
-            let zip = input.questionInt('enter the zip code ')
-            if (!contactRestriction.test(zip) || zip.length != 6) { //input validation of zip
-                zip = input.question("Enter the zip code 6 digits only : ");
+            this.zip = input.questionInt('enter the zip code ')
+            if (!contactRestriction.test(this.zip)) { //input validation of zip
+                this.zip = input.question("Enter the zip code 6 digits only : ");
             }
-            let mob = input.questionInt('enter the mobile number ')
-            if (!contactRestriction.test(mob) || mob.length != 10) { //input validation of mobile number
-                mob = input.question("Enter the mod num 10 digits only : ");
+            this.mob = input.questionInt('enter the mobile number ')
+            if (!mobRes.test(this.mob)) { //input validation of mobile number
+                this.mob = input.question("Enter the mod num 10 digits only : ");
             }
-            let newObj = new Person(id, firstName, lastName, address, city, state, zip, mob)
+            let newObj = new Person(this.id, this.firstName, this.lastName, this.address, this.city, this.state, this.zip, this.mob)
             this.jsonDataa.Person.push(JSON.parse(JSON.stringify(newObj)));
             await fs.writeFileSync('address.json', JSON.stringify(this.jsonDataa));
             console.log('entry added ')
@@ -62,12 +68,12 @@ class AddressBookFunction extends Person { //inheritance implementation
             console.log(err)
         }
     }
-    removeEntry = () => { //function to remove data
+    removeEntry = (deleteID) => { //function to remove data
         try {
-            let deleteID = input.questionInt('enter the delete id ') //id to remove 
-            let isAvailable = true;
+            let isAvailable = false;
             for (let i = 0; i < this.jsonDataa.Person.length; i++) { //loop to find the id and remove
                 if (this.jsonDataa.Person[i].id === deleteID) {
+                    isAvailable = true;
                     this.jsonDataa.Person.splice(i, 1);
                 }
                 else {
@@ -87,7 +93,7 @@ class AddressBookFunction extends Person { //inheritance implementation
             console.log(error)
         }
     }
-    set editEntry(editID) { //function to edit data
+    editEntry(editID) { //function to edit data
         try {
             let isAvailable = false;
             for (let i = 0; i < this.jsonDataa.Person.length; i++) {
@@ -143,13 +149,7 @@ class AddressBookFunction extends Person { //inheritance implementation
         }
     }
 }
-class AddressBook extends AddressBookFunction { //Inhertitance implementation
-    constructor() {
-        super() //Super keyword for calling above class constructor
-        let jsonData = fs.readFileSync('address.json');
-        this.jsonDataa = JSON.parse(jsonData);
-    }
-}
+
 module.exports = {
     AddressBook
 }
