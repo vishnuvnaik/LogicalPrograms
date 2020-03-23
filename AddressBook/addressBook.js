@@ -33,7 +33,7 @@ try {
             break;
         case 3:
             let editID = input.questionInt('enter the id to edit')
-            addBook.editEntry();
+            addBook.editEntry = editID;
             break;
         case 4:
             addBook.sortByName();

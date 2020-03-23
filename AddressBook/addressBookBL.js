@@ -82,7 +82,7 @@ class AddressBookFunction extends Person { //inheritance implementation
             console.log(error)
         }
     }
-    editEntry = (editID) => { //function to edit data
+    set editEntry(editID) { //function to edit data
         try {
             let isAvailable = false;
             for (let i = 0; i < this.jsonDataa.Person.length; i++) {
@@ -104,7 +104,7 @@ class AddressBookFunction extends Person { //inheritance implementation
             else {
                 console.log("entry not found ")
             }
-            fs.writeFileSync('addressBook.json', JSON.stringify(this.jsonBookData));
+            fs.writeFileSync('address.json', JSON.stringify(this.jsonDataa));
         }
         catch (err) {
             console.log(Error)
