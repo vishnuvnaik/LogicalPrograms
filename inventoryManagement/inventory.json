@@ -1,24 +1,53 @@
 {
     "Rice": [
         {
-            "riceName" : "whiterice",
-            "weight" : "25",
-            "pricePerKg" : "50"
+            "riceName": "whiterice",
+            "weight": 25,
+            "pricePerKg": 50
         },
         {
-            "riceName" : "whiterice",
-            "weight" : "25",
-            "pricePerKg" : "50"
+            "riceName": "redrice",
+            "weight": 35,
+            "pricePerKg": 60
         },
         {
-            "riceName" : "whiterice",
-            "weight" : "25",
-            "pricePerKg" : "50"
+            "riceName": "brownrice",
+            "weight": 50,
+            "pricePerKg": 70
         }
     ],
-    "Wheat":[
+    "Wheat": [
         {
-            
+            "wheatName": "Punjabi",
+            "weight": 28,
+            "pricePerKg": 75
+        },
+        {
+            "wheatName": "Gujarathi",
+            "weight": 35,
+            "pricePerKg": 65
+        },
+        {
+            "wheatName": "mhWheat",
+            "weight": 38,
+            "pricePerKg": 58
+        }
+    ],
+    "Pulses": [
+        {
+            "pulsesName": "toordaal",
+            "weight": 40,
+            "pricePerKg": 48
+        },
+        {
+            "pulsesName": "chanadaal",
+            "weight": 42,
+            "pricePerKg": 49
+        },
+        {
+            "pulsesName": "moongdaal",
+            "weight": 47,
+            "pricePerKg": 54
         }
     ]
 }
