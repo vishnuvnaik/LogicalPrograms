@@ -7,6 +7,7 @@ const fs = require('fs')
 const input = require('readline-sync')
 nameRestriction = /[A-z]/g; //for input validation of string
 contactRestriction = /[0-9]/g; //for input validation of numbers
+
 class Person {
     constructor(id, firstName, lastName, address, city, state, zip, mob) {
         this.id = id;
@@ -19,43 +20,47 @@ class Person {
         this.mob = mob;
     }
 }
+
 class AddressBookFunction extends Person { //inheritance implementation
-    addData = () => { //function to add data 
-        const id = input.questionInt(' enter the id no ') //enter datas
-        const firstName = input.question('enter the first name')
-        if (nameRestriction.test(firstName) === false) { //input validation of name 
-            firstName = read.question("No special characters Invalid name! :");
-        }
-        const lastName = input.question('  enter the last name ')
-        if (nameRestriction.test(lastName) === false) { //input validation
-            lastName = read.question("No special characters Invalid name! :");
-        }
-        const address = input.question('enter the address')
-        if (nameRestriction.test(address) === false) { //input validation of address 
-            address = input.question(" No special characters address! :");
-        }
-        const city = input.question('enter the city ')
-        if (nameRestriction.test(city) === false) { //input validation of city
-            city = input.question(" No special characters city! :");
-        }
-        let state = input.question('enter the state')
-        if (nameRestriction.test(state) === false) {
-            state = input.question(" No special characters city! :");
-        }
-        let zip = input.questionInt('enter the zip code ')
-        if (contactRestriction.test(zip) === false || zip.length != 6) { //input validation of zip
-            zip = input.question("Enter the zip code 6 digits only : ");
-        }
-        let mob = input.questionInt('enter the mobile number ')
-        if (contactRestriction.test(mob) === false || mob.length != 10) { //input validation of mobile number
-            mob = input.question("Enter the mod num 10 digits only : ");
-        }
-        let newObj = new Person(id, firstName, lastName, address, city, state, zip, mob)
-        async () => {
+    addData = async () => { //function to add data 
+        try {
+            const id = input.questionInt(' enter the id no ') //enter datas
+            const firstName = input.question('enter the first name')
+            if (nameRestriction.test(firstName) === false) { //input validation of name 
+                firstName = read.question("No special characters Invalid name! :");
+            }
+            const lastName = input.question('  enter the last name ')
+            if (nameRestriction.test(lastName) === false) { //input validation
+                lastName = read.question("No special characters Invalid name! :");
+            }
+            let address = input.question('enter the address')
+            if (nameRestriction.test(address) === false) { //input validation of address 
+                address = input.question(" No special characters address! :");
+            }
+            let city = input.question('enter the city ')
+            if (!nameRestriction.test(city) === false) { //input validation of city
+                city = input.question(" No special characters city! :");
+            }
+            let state = input.question('enter the state')
+            if (!nameRestriction.test(state)) {
+                state = input.question(" No special characters city! :");
+            }
+            let zip = input.questionInt('enter the zip code ')
+            if (!contactRestriction.test(zip) || zip.length != 6) { //input validation of zip
+                zip = input.question("Enter the zip code 6 digits only : ");
+            }
+            let mob = input.questionInt('enter the mobile number ')
+            if (!contactRestriction.test(mob) || mob.length != 10) { //input validation of mobile number
+                mob = input.question("Enter the mod num 10 digits only : ");
+            }
+            let newObj = new Person(id, firstName, lastName, address, city, state, zip, mob)
             this.jsonDataa.Person.push(JSON.parse(JSON.stringify(newObj)));
-            await fs.writeFile('address.json', JSON.stringify(this.jsonDataa));
+            await fs.writeFileSync('address.json', JSON.stringify(this.jsonDataa));
+            console.log('entry added ')
         }
-        console.log('entry added ')
+        catch (err) {
+            console.log(err)
+        }
     }
     removeEntry = () => { //function to remove data
         try {
