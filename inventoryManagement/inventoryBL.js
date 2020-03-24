@@ -3,24 +3,27 @@ const fs = require('fs')
 strRes = /[A-z]/g;
 numRes = /[0-9]/g;
 class Rice {
-    constructor(riceName, weight, pricePerKg) {
+    constructor(riceName, weight, pricePerKg, total) {
         this.riceName = riceName;
         this.weight = weight;
         this.pricePerKg = pricePerKg;
+        this.total = total;
     }
 }
 class Wheat {
-    constructor(wheatName, weight, pricePerKg) {
+    constructor(wheatName, weight, pricePerKg, total) {
         this.wheatName = wheatName;
         this.weight = weight;
         this.pricePerKg = pricePerKg;
+        this.total = total;
     }
 }
 class Pulse {
-    constructor(pulsesName, weight, pricePerKg) {
+    constructor(pulsesName, weight, pricePerKg, total) {
         this.pulsesName = pulsesName;
         this.weight = weight;
         this.pricePerKg = pricePerKg;
+        this.total = total;
     }
 }
 class InventoryManage {
@@ -93,18 +96,26 @@ class InventoryManage {
         let pulsesTot = 0;
         let i = 0;
         for (i = 0; i < this.inventData.rice.length; i++) {
-            riceTot += this.inventData.rice[i].pricePerKg;
-        }
-        for (i = 0; i < this.inventData.pulses.length; i++) {
-            pulsesTot += this.inventData.pulses[i].pricePerKg;
+            console.log("the total value of", this.inventData.rice[i].riceName, "is", this.inventData.rice[i].weight * this.inventData.rice[i].pricePerKg);
+            this.total = this.inventData.rice[i].weight * this.inventData.rice[i].pricePerKg;
+            riceTot += this.total;
+
         }
         for (i = 0; i < this.inventData.wheat.length; i++) {
-            wheatTot += this.inventData.wheat[i].pricePerKg;
+            console.log("the total value of", this.inventData.wheat[i].wheatName, "is", this.inventData.wheat[i].weight * this.inventData.wheat[i].pricePerKg);
+            this.total = this.inventData.wheat[i].weight * this.inventData.wheat[i].pricePerKg;
+            wheatTot += this.total;
         }
+        for (i = 0; i < this.inventData.pulses.length; i++) {
+            console.log("the total value of", this.inventData.pulses[i].pulsesName, "is", this.inventData.pulses[i].weight * this.inventData.pulses[i].pricePerKg);
+            this.total = this.inventData.pulses[i].weight * this.inventData.pulses[i].pricePerKg;
+            pulsesTot += this.total;
+        }
+        let grandTot = riceTot + wheatTot + pulsesTot;
         console.log("rice total = ", riceTot);
         console.log("wheat total = ", wheatTot);
         console.log("pulses total = ", pulsesTot);
-
+        console.log('grand total = ', grandTot)
     }
 }
 module.exports = {
