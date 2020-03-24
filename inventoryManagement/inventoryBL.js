@@ -26,6 +26,26 @@ class Pulse {
         this.total = total;
     }
 }
+class AddInvent {
+    constructor(name, Name, weight, pricePerKg) {
+        this.name = name;
+        this.Name = Name;
+        this.weight = weight;
+        this.pricePerKg = pricePerKg;
+        let jsonData = fs.readFileSync('inventory.json')
+        this.inventData = JSON.parse(jsonData)
+    }
+    addInventory() {
+        this.name = input.question(' enter the name of inventory')
+        this.Name = input.question(' enter the name of type ')
+        this.weight = input.questionInt(' enter the weight ')
+        this.pricePerKg = input.questionInt(' enter the price per kg of the item ')
+        let newobj = new AddInvent(this.name, this.Name, this.weight, this.pricePerKg)
+        this.inventData.AddInvent.push(JSON.parse(JSON.stringify(newobj)));
+        fs.writeFileSync('inventory.json', JSON.stringify(this.inventData))
+
+    }
+}
 class InventoryManage {
     constructor() {
         this.rice = [];
@@ -119,5 +139,5 @@ class InventoryManage {
     }
 }
 module.exports = {
-    InventoryManage
+    InventoryManage, AddInvent
 }
