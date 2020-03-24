@@ -17,8 +17,8 @@
         },
         {
             "riceName": "Basumati",
-            "weight": "42",
-            "pricePerKg": "7"
+            "weight": 42,
+            "pricePerKg": 7
         }
     ],
     "wheat": [
