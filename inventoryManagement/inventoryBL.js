@@ -3,19 +3,58 @@ const fs = require('fs')
 strRes = /[A-z]/g;
 numRes = /[0-9]/g;
 class Rice {
-    constructor(riceName, weight, pricePerKg, total) {
+    constructor(riceName, weight, pricePerKg) {
         this.riceName = riceName;
         this.weight = weight;
         this.pricePerKg = pricePerKg;
-        this.total = total;
+        let jsonData = fs.readFileSync('inventory.json')
+        this.inventData = JSON.parse(jsonData)
+        this.add = function () {
+            //add = () => {
+            this.riceName = input.question(' enter the ricename ')
+            if (!strRes.test(this.riceName)) {
+                this.riceName = input.question('n special characters, enter ricename again')
+            }
+            this.weight = input.question(' enter the weight of rice ')
+            if (!numRes.test(this.weight)) {
+                this.weight = input.questionInt('includes only numbers')
+            }
+            this.pricePerKg = input.question(' enter the price per kg of rice ')
+            if (!numRes.test(this.pricePerKg)) {
+                this.pricePerKg = input.questionInt('includes only numbers')
+            }
+            let rice = new Rice(this.riceName, this.weight, this.pricePerKg)
+            this.inventData.rice.push(JSON.parse(JSON.stringify(rice)));
+            fs.writeFileSync('inventory.json', JSON.stringify(this.inventData))
+            console.log("entry added")
+        }
     }
 }
 class Wheat {
-    constructor(wheatName, weight, pricePerKg, total) {
+    constructor(wheatName, weight, pricePerKg) {
         this.wheatName = wheatName;
         this.weight = weight;
         this.pricePerKg = pricePerKg;
-        this.total = total;
+        let jsonData = fs.readFileSync('inventory.json')
+        this.inventData = JSON.parse(jsonData)
+        this.addW = function () {
+            let wheatName = input.question(' enter the wheat name ')
+            if (!strRes.test(wheatName)) {
+                wheatName = input.question('np special characters, enter ricename again')
+            }
+            let weight = input.question(' enter the weight of wheat ')
+            if (!numRes.test(weight)) {
+                weight = input.questionInt('includes only numbers')
+            }
+            let pricePerKg = input.question(' enter the price per kg of wheat ')
+            if (!numRes.test(pricePerKg)) {
+                pricePerKg = input.questionInt('includes only numbers')
+            }
+            const wheat = new Wheat(wheatName, weight, pricePerKg)
+            this.inventData.wheat.push(JSON.parse(JSON.stringify(wheat)));
+            fs.writeFileSync('inventory.json', JSON.stringify(this.inventData))
+            console.log("entry added")
+        }
     }
 }
 class Pulse {
@@ -24,91 +63,59 @@ class Pulse {
         this.weight = weight;
         this.pricePerKg = pricePerKg;
         this.total = total;
-    }
-}
-class AddInvent {
-    constructor(name, Name, weight, pricePerKg) {
-        this.name = name;
-        this.Name = Name;
-        this.weight = weight;
-        this.pricePerKg = pricePerKg;
         let jsonData = fs.readFileSync('inventory.json')
         this.inventData = JSON.parse(jsonData)
-    }
-    addInventory() {
-        this.name = input.question(' enter the name of inventory')
-        this.Name = input.question(' enter the name of type ')
-        this.weight = input.questionInt(' enter the weight ')
-        this.pricePerKg = input.questionInt(' enter the price per kg of the item ')
-        let newobj = new AddInvent(this.name, this.Name, this.weight, this.pricePerKg)
-        this.inventData.AddInvent.push(JSON.parse(JSON.stringify(newobj)));
-        fs.writeFileSync('inventory.json', JSON.stringify(this.inventData))
-
+        this.addP = function () {
+            let pulsesName = input.question(' enter the pulse name ')
+            if (!strRes.test(pulsesName)) {
+                pulsesName = input.question('np special characters, enter ricename again')
+            }
+            let weight = input.question(' enter the weight of pulse ')
+            if (!numRes.test(weight)) {
+                weight = input.questionInt('includes only numbers')
+            }
+            let pricePerKg = input.question(' enter the price per kg of pulse ')
+            if (!numRes.test(pricePerKg)) {
+                pricePerKg = input.questionInt('includes only numbers')
+            }
+            const pulse = new Pulse(pulsesName, weight, pricePerKg)
+            this.inventData.inventry.push(JSON.parse(JSON.stringify(pulse)));
+            fs.writeFileSync('inventory.json', JSON.stringify(this.inventData))
+            console.log("entry added")
+        }
     }
 }
 class InventoryManage {
     constructor() {
-        this.rice = [];
-        this.wheat = [];
-        this.pulses = [];
+        this.newRice = new Rice;
+        this.wheat = new Wheat;
+        this.pulse = new Pulse;
         let jsonData = fs.readFileSync('inventory.json')
         this.inventData = JSON.parse(jsonData)
     }
-    addRice = () => {
+    addItems = () => {
         try {
-            let riceName = input.question(' enter the ricename ')
-            if (!strRes.test(riceName)) {
-                riceName = input.question('np special characters, enter ricename again')
+            var ch = Number(input.questionInt("Choose from the given options \n" +
+                "1 - Add Rice \n2 - Add Wheat \n3 - Add Pulses \n4 - Add new inventory \n "))
+            switch (ch) {
+                case 1:
+                    this.newRice.add();
+                    break;
+                case 2:
+                    this.wheat.addW();
+                    break;
+                case 3:
+                    this.newPulse.addP();
+                    break;
+                case 4:
+                    process.exit(0);
+                default:
+                    console.log("invalid");
             }
-            let weight = input.question(' enter the weight of rice ')
-            if (!numRes.test(weight)) {
-                weight = input.questionInt('includes only numbers')
-            }
-            let pricePerKg = input.question(' enter the price per kg of rice ')
-            if (!numRes.test(pricePerKg)) {
-                pricePerKg = input.questionInt('includes only numbers')
-            }
-            const ricenew = new Rice(riceName, weight, pricePerKg)
-            this.inventData.ricenew.push(JSON.parse(JSON.stringify(ricenew)));
-            fs.writeFileSync('inventory.json', JSON.stringify(this.inventData))
         }
         catch (err) {
             console.log(err)
         }
-    }
-    addWheat = () => {
-        let wheatName = input.question(' enter the wheat name ')
-        if (!strRes.test(wheatName)) {
-            wheatName = input.question('np special characters, enter ricename again')
-        }
-        let weight = input.question(' enter the weight of wheat ')
-        if (!numRes.test(weight)) {
-            weight = input.questionInt('includes only numbers')
-        }
-        let pricePerKg = input.question(' enter the price per kg of wheat ')
-        if (!numRes.test(pricePerKg)) {
-            pricePerKg = input.questionInt('includes only numbers')
-        }
-        const wheat = new Wheat(wheatName, weight, pricePerKg)
-        this.inventData.wheat.push(JSON.parse(JSON.stringify(wheat)));
-        fs.writeFileSync('inventory.json', JSON.stringify(this.inventData))
-    }
-    addPulses = () => {
-        let pulseName = input.question(' enter the ricename ')
-        if (!strRes.test(pulseName)) {
-            pulseName = input.question('np special characters, enter ricename again')
-        }
-        let weight = input.question(' enter the weight of rice ')
-        if (!numRes.test(weight)) {
-            weight = input.questionInt('includes only numbers')
-        }
-        let pricePerKg = input.question(' enter the price per kg of rice ')
-        if (!numRes.test(pricePerKg)) {
-            pricePerKg = input.questionInt('includes only numbers')
-        }
-        const pulse = new Pulse(riceName, weight, pricePerKg)
-        this.inventData.pulse.push(JSON.parse(JSON.stringify(pulse)));
-        fs.writeFileSync('inventory.json', JSON.stringify(this.inventData))
     }
     calculateTotal() {
         let riceTot = 0;
@@ -132,12 +139,12 @@ class InventoryManage {
             pulsesTot += this.total;
         }
         let grandTot = riceTot + wheatTot + pulsesTot;
-        console.log("rice total = ", riceTot);
-        console.log("wheat total = ", wheatTot);
+        console.log("rice total   = ", riceTot);
+        console.log("wheat total  = ", wheatTot);
         console.log("pulses total = ", pulsesTot);
-        console.log('grand total = ', grandTot)
+        console.log('grand total  = ', grandTot)
     }
 }
 module.exports = {
-    InventoryManage, AddInvent
+    InventoryManage
 }
