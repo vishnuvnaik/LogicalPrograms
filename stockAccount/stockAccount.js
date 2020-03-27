@@ -2,7 +2,7 @@ const path = require('./stockAccountBL');
 const fs = require('fs').promises;
 let input = require('readline-sync')
 async () => { //reading json file using async await
-    const jsonData = await fs.readFile('address.json');
+    const jsonData = await fs.readFile('stock.json');
     this.stockData = JSON.parse(jsonData);
 }
 try {

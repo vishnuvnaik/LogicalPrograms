@@ -1,4 +1,5 @@
 const input = require('readline-sync')
+const fs = require('fs')
 
 class Stock {
     constructor(name, numOfStock, price) {
@@ -9,13 +10,15 @@ class Stock {
 }
 class StockAccount {
     constructor() {
+        const jsonData = fs.readFileSync('stock.json');
+        this.stockData = JSON.parse(jsonData);
     }
     addStock = async () => {
         try {
-            let name = readLine.question('Enter name of stock : ');
-            let numOfStock = readLine.questionInt('Enter number of stock : ');
-            let price = readLine.questionInt('Enter the price : ');
-            let stock = new Stock(name, numberOfStock, price);
+            let name = input.question('Enter name of stock : ');
+            let numOfStock = input.questionInt('Enter number of stock : ');
+            let price = input.questionInt('Enter the price : ');
+            let stock = new Stock(name, numOfStock, price);
             this.stockData.stock.push(JSON.parse(JSON.stringify(stock)));
             await fs.writeFileSync('stockDetails.json', JSON.stringify(this.stockData));
             console.log(' entry added to the file ')
