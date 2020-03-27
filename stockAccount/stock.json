@@ -1,0 +1,19 @@
+{
+    "Stock": [
+        {
+            "name": "SBI",
+            "numOfStock": 19,
+            "price": 9899
+        },
+        {
+            "name": "Axis",
+            "numOfStock": 12,
+            "price": 8542
+        },
+        {
+            "name": "South indian bank",
+            "numOfStock": 10,
+            "price": 9599
+        }
+    ]
+}
