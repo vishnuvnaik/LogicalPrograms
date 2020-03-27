@@ -15,6 +15,7 @@ try {
             break;
         case 2:
             stockAcc.printReport();
+            break;
         case 3:
             process.exit(0);
         default:
