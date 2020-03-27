@@ -20,7 +20,7 @@ class StockAccount {
             let price = input.questionInt('Enter the price : ');
             let stock = new Stock(name, numOfStock, price);
             this.stockData.stock.push(JSON.parse(JSON.stringify(stock)));
-            await fs.writeFileSync('stockDetails.json', JSON.stringify(this.stockData));
+            await fs.writeFileSync('stock.json', JSON.stringify(this.stockData));
             console.log(' entry added to the file ')
         }
         catch (err) {
