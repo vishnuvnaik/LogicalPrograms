@@ -27,14 +27,19 @@ class StockAccount {
             console.log(err)
         }
     }
-    printReport = async () => {
+}
+class PrintStock extends StockAccount {
+    constructor() {
+        super()
+    }
+    printReport = () => {
         for (let i in this.stockData.stock) {
             let totalPrice = this.stockData.stock[i].price * this.stockData.stock[i].numOfStock;
-            console.log('Total price = ', totalPrice);
+            console.log(`Total Price of ${this.stockData.stock[i].name} is ${totalPrice}`);
         }
 
     }
 }
 module.exports = {
-    StockAccount
+    StockAccount, PrintStock
 }
