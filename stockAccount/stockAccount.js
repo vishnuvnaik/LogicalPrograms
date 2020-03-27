@@ -7,6 +7,7 @@ async () => { //reading json file using async await
 }
 try {
     let stockAcc = new path.StockAccount();
+    let stockAccPrint = new path.PrintStock();
     var ch = Number(input.questionInt("Choose from the given options \n" +
         "1 - Add Stock \n2 - print report \n "))
     switch (ch) {
@@ -14,7 +15,7 @@ try {
             stockAcc.addStock();
             break;
         case 2:
-            stockAcc.printReport();
+            stockAccPrint.printReport();
             break;
         case 3:
             process.exit(0);
