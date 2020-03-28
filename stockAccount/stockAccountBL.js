@@ -1,6 +1,16 @@
 const input = require('readline-sync')
 const fs = require('fs')
-
+numRestriction = /[0-9]/g;
+nameRestriction = /[A-z]/g;
+class Customer
+{
+    constructor(name,password,stock)
+    {
+        this.name=name;
+        this.password= password;
+        this.stock = [];
+    }
+}
 class Stock {
     constructor(name, numOfStock, price) {
         this.name = name;
@@ -16,7 +26,13 @@ class StockAccount {
     addStock = async () => {
         try {
             let name = input.question('Enter name of stock : ');
+            if (!nameRestriction.test(name)) { //input validation of name 
+                this.name = input.question("No special characters Invalid name! :");
+            }
             let numOfStock = input.questionInt('Enter number of stock : ');
+            if (!numRestriction.test(numOfStock)) { //input validation of numOfStock
+                this.numOfStock = input.question("Enter digits only : ");
+            }
             let price = input.questionInt('Enter the price : ');
             let stock = new Stock(name, numOfStock, price);
             this.stockData.stock.push(JSON.parse(JSON.stringify(stock)));
