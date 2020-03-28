@@ -73,6 +73,17 @@ class SellStock extends StockAccount {
         fs.writeFileSync('stock.json', JSON.stringify(this.stockData));
     }
 }
+class PrintStock extends StockAccount {
+    constructor() {
+        super()
+    }
+    printReport(indexOfCust) {
+        console.log(`** Report stock of ${this.stockData.customer[indexOfCust].name}`);
+        for (let n in this.stockData.customer[indexOfCust].stock) {
+            console.log(this.stockData.customer[indexOfCust].stock[n]);
+        }
+    }
+}
 
 
 
