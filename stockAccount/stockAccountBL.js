@@ -2,13 +2,11 @@ const input = require('readline-sync')
 const fs = require('fs')
 numRestriction = /[0-9]/g;
 nameRestriction = /[A-z]/g;
-class Customer
-{
-    constructor(name,password,stock)
-    {
-        this.name=name;
-        this.password= password;
-        this.stock = [];
+class Customer {
+    constructor(name, password, stock) {
+        this.name = name;
+        this.password = password;
+        this.stock = [stock];
     }
 }
 class Stock {
@@ -23,39 +21,18 @@ class StockAccount {
         const jsonData = fs.readFileSync('stock.json');
         this.stockData = JSON.parse(jsonData);
     }
-    addStock = async () => {
-        try {
-            let name = input.question('Enter name of stock : ');
-            if (!nameRestriction.test(name)) { //input validation of name 
-                this.name = input.question("No special characters Invalid name! :");
+    checkAccount(name, password) {
+        let position = -1;
+        for (let i in this.stockData.customer) {
+            if (this.stockData.customer[i].name == name && this.stockData.customer[i].password == password) {
+                position = i;
             }
-            let numOfStock = input.questionInt('Enter number of stock : ');
-            if (!numRestriction.test(numOfStock)) { //input validation of numOfStock
-                this.numOfStock = input.question("Enter digits only : ");
-            }
-            let price = input.questionInt('Enter the price : ');
-            let stock = new Stock(name, numOfStock, price);
-            this.stockData.stock.push(JSON.parse(JSON.stringify(stock)));
-            await fs.writeFileSync('stock.json', JSON.stringify(this.stockData));
-            console.log(' entry added to the file ')
         }
-        catch (err) {
-            console.log(err)
-        }
+        return position;
     }
 }
-class PrintStock extends StockAccount {
-    constructor() {
-        super()
-    }
-    printReport = () => {
-        for (let i in this.stockData.stock) {
-            let totalPrice = this.stockData.stock[i].price * this.stockData.stock[i].numOfStock;
-            console.log(`Total Price of ${this.stockData.stock[i].name} is ${totalPrice}`);
-        }
 
-    }
-}
+
 module.exports = {
-    StockAccount, PrintStock
+    StockAccount, PrintStock, BuyStock, SellStock
 }
