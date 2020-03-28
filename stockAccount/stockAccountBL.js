@@ -54,6 +54,26 @@ class BuyStock extends StockAccount {
         fs.writeFileSync('stock.json', JSON.stringify(this.stockData));
     }
 }
+class SellStock extends StockAccount {
+    constructor() {
+        super()
+    }
+    sellStock(custIndex) {
+        console.log('----Available Stocks-----');
+        for (let n in this.stockData.customer[custIndex].stock) {
+            console.log(`${n} => ${this.stockData.customer[custIndex].stock[n].name}`);
+        }
+        let nameStock = readLine.question('Enter name of the Stock for sell : ');
+        for (let n in this.stockData.customer[custIndex].stock) {
+            if (this.stockData.customer[custIndex].stock[n].name == nameStock) {
+                this.stockData.customer[custIndex].stock.splice(n, 1);
+            }
+        }
+        // this.commercialData.customer[indexOfCust].stock.push(JSON.parse(JSON.stringify(buyStock)));
+        fs.writeFileSync('stock.json', JSON.stringify(this.stockData));
+    }
+}
+
 
 
 module.exports = {
