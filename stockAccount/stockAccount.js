@@ -18,7 +18,7 @@ try {
         console.log('Successfully Logged In');
         stockPrint.printReport(reslt);
         var ch = Number(input.questionInt("Choose from the given options \n" +
-            "1 - buy Stock \n2 - Sell stock \n3 - print report \n "))
+            "1 - buy Stock \n2 - Sell stock \n3 - print report \n  "))
         switch (ch) {
             case 1:
                 stockBuy.buyStock(reslt);
