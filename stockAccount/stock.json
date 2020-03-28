@@ -1,1 +1,69 @@
-{"stock":[{"name":"SBI","numOfStock":19,"price":9899},{"name":"Axis","numOfStock":12,"price":8542},{"name":"South indian bank","numOfStock":10,"price":9599},{"name":"new","numOfStock":10,"price":400},{"name":"Nike","numOfStock":55,"price":2000}]}
+{
+    "customer": [
+        {
+            "name": "Vishnu",
+            "password": "123456",
+            "stock": [
+                {
+                    "name": "Amazon",
+                    "number": 20,
+                    "price": 2000
+                }
+            ]
+        },
+        {
+            "name": "Anilu",
+            "password": "abcdef",
+            "stock": [
+                {
+                    "name": "Flipkart",
+                    "number": 20,
+                    "price": 3000
+                }
+            ]
+        },
+        {
+            "name": "Dude",
+            "password": "12345678",
+            "stock": [
+                {
+                    "name": "Nike",
+                    "number": 25,
+                    "price": 1000
+                },
+                {
+                    "name": "Birla",
+                    "number": 20,
+                    "price": 3000
+                }
+            ]
+        },
+        {
+            "name": "Hari",
+            "password": "hariii",
+            "stock": [
+                {
+                    "name": "Honda",
+                    "number": 24,
+                    "price": 537
+                }
+            ]
+        },
+        {
+            "name": "Anju",
+            "password": "anjuuuu",
+            "stock": [
+                {
+                    "name": "SCB",
+                    "number": 25,
+                    "price": 400
+                },
+                {
+                    "name": "SBI",
+                    "number": 15,
+                    "price": 3200
+                }
+            ]
+        }
+    ]
+}
