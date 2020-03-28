@@ -64,6 +64,17 @@
                     "price": 3200
                 }
             ]
+        },
+        {
+            "name": "Manoj",
+            "password": "789456",
+            "stock": [
+                {
+                    "name": "Amazon",
+                    "numOfStock": 14,
+                    "price": 500
+                }
+            ]
         }
     ]
 }
