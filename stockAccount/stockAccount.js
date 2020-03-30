@@ -20,21 +20,21 @@ try {
 
         let userName = input.question('Enter Username = ');
         let password = input.question('Enter the Password = ');
-        let reslt = stockAcc.checkAccount(userName, password);
-        if (reslt != -1) {
+        let result = stockAcc.checkAccount(userName, password);
+        if (result != -1) {
             console.log('Successfully Logged In');
-            stockPrint.printReport(reslt);
+            stockPrint.printReport(result);
             var ch = Number(input.questionInt("Choose from the given options \n" +
                 "\n1 - buy Stock \n2 - Sell stock \n3 - print report \n4 - Exit \n"))
             switch (ch) {
                 case 1:
-                    stockBuy.buyStock(reslt);
+                    stockBuy.buyStock(result);
                     break;
                 case 2:
-                    stockSell.sellStock(reslt);
+                    stockSell.sellStock(result);
                     break;
                 case 3:
-                    stockPrint.printReport(reslt);
+                    stockPrint.printReport(result);
                     break;
                 case 4:
                     process.exit(0);
