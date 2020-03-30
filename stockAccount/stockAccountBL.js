@@ -8,10 +8,11 @@ const fs = require('fs')
 numRestriction = /[0-9]/g;
 nameRestriction = /[A-z]/g;
 class Customer {
-    constructor(name, password, stock) {
+    constructor(name, password, shares, amount) {
         this.name = name;
         this.password = password;
-        this.stock = [stock];
+        this.shares = shares;
+        this.amount = amount;
     }
 }
 class Stock {
@@ -24,12 +25,12 @@ class Stock {
 class StockAccount {
     constructor() {
         const jsonData = fs.readFileSync('stock.json');
-        this.stockData = JSON.parse(jsonData);
+        this.custData = JSON.parse(jsonData);
     }
     checkAccount(name, password) {
         let position = -1;
-        for (let i in this.stockData.customer) {
-            if (this.stockData.customer[i].name == name && this.stockData.customer[i].password == password) {
+        for (let i in this.custData.customer) {
+            if (this.custData.customer[i].name == name && this.custData.customer[i].password == password) {
                 position = i;
             }
         }
@@ -50,18 +51,17 @@ class Createacc extends StockAccount {
         if (!nameRestriction.test(stockName)) { //input validation of name 
             this.stockName = input.question("No special characters Invalid name! :");
         }
-        let number = input.questionInt('Enter Numbers Of Stock : ');
-        if (!numRestriction.test(number)) { //input validation of numOfStock
-            this.number = input.question("Enter digits only : ");
+        let shares = input.questionInt('Enter Numbers Of Shares : ');
+        if (!numRestriction.test(shares)) { //input validation of numOfStock
+            this.shares = input.question("Enter digits only : ");
         }
-        let price = input.questionInt('Enter price of stock : ');
-        if (!numRestriction.test(price)) { //input validation of numOfStock
-            this.price = input.question("Enter digits only : ");
+        let amount = input.questionInt('Enter the amount in hand : ');
+        if (!numRestriction.test(amount)) { //input validation of numOfStock
+            this.amount = input.question("Enter digits only : ");
         }
-        let newStock = new Stock(stockName, number, price);
-        let customerOb = new Customer(custName, password, newStock);
-        this.stockData.customer.push(JSON.parse(JSON.stringify(customerOb)));
-        await fs.writeFileSync('stock.json', JSON.stringify(this.stockData));
+        let customerOb = new Customer(custName, password, shares, amount);
+        this.custData.customer.push(JSON.parse(JSON.stringify(customerOb)));
+        await fs.writeFileSync('stock.json', JSON.stringify(this.custData));
         console.log("new account successfully created ")
     }
 }
@@ -104,7 +104,6 @@ class SellStock extends StockAccount {
                 this.stockData.customer[custIndex].stock.splice(n, 1);
             }
         }
-        // this.commercialData.customer[indexOfCust].stock.push(JSON.parse(JSON.stringify(buyStock)));
         fs.writeFileSync('stock.json', JSON.stringify(this.stockData));
     }
 }
@@ -113,9 +112,9 @@ class PrintStock extends StockAccount {
         super()
     }
     printReport(indexOfCust) {
-        console.log(`** Report stock of ${this.stockData.customer[indexOfCust].name}`);
-        for (let n in this.stockData.customer[indexOfCust].stock) {
-            console.log(this.stockData.customer[indexOfCust].stock[n]);
+        console.log(`** Report stock of ${this.custData.customer[indexOfCust].name}`);
+        for (let n in this.custData.customer[indexOfCust].shares) {
+            console.log(this.custData.customer[indexOfCust].shares[n]);
         }
     }
 }
