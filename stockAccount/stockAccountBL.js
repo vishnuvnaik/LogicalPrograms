@@ -31,12 +31,29 @@ class StockAccount {
         return position;
     }
 }
+class Createacc extends StockAccount {
+    constructor() {
+        super()
+    }
+    createAccount = async () => {
+        let custName = input.question('Enter Account Holder Name : ');
+        let password = input.question('Enter The password : ');
+        let stockName = input.question('Enter Stock Name : ');
+        let number = input.questionInt('Enter Numbers Of Stock : ');
+        let price = input.questionInt('Enter price of stock : ');
+        let stockObj = new Stock(stockName, number, price);
+        let customerObj = new Customer(custName, password, stockObj);
+        this.stockData.customer.push(JSON.parse(JSON.stringify(customerObj)));
+        await fs.writeFileSync('stock.json', JSON.stringify(this.stockData));
+        console.log("new account successfully created ")
+    }
+}
 class BuyStock extends StockAccount {
     constructor() {
         super()
     }
     buyStock(custIndex) {
-        console.log(`-------** Welcom ${this.stockData.customer[custIndex].name}..`);
+        console.log(`-------** Welcome ${this.stockData.customer[custIndex].name}..`);
         let name = input.question('Enter the name of Stock : ');
         if (!nameRestriction.test(name)) { //input validation of name 
             this.name = input.question("No special characters Invalid name! :");
@@ -84,9 +101,6 @@ class PrintStock extends StockAccount {
         }
     }
 }
-
-
-
 module.exports = {
-    StockAccount, PrintStock, BuyStock, SellStock
+    StockAccount, PrintStock, BuyStock, SellStock, Createacc
 }
