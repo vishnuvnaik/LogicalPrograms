@@ -37,10 +37,22 @@ class Createacc extends StockAccount {
     }
     createAccount = async () => {
         let custName = input.question('Enter Account Holder Name : ');
+        if (!nameRestriction.test(custName)) { //input validation of name 
+            this.custName = input.question("No special characters Invalid name! :");
+        }
         let password = input.question('Enter The password : ');
         let stockName = input.question('Enter Stock Name : ');
+        if (!nameRestriction.test(stockName)) { //input validation of name 
+            this.stockName = input.question("No special characters Invalid name! :");
+        }
         let number = input.questionInt('Enter Numbers Of Stock : ');
+        if (!numRestriction.test(number)) { //input validation of numOfStock
+            this.number = input.question("Enter digits only : ");
+        }
         let price = input.questionInt('Enter price of stock : ');
+        if (!numRestriction.test(price)) { //input validation of numOfStock
+            this.price = input.question("Enter digits only : ");
+        }
         let stockObj = new Stock(stockName, number, price);
         let customerObj = new Customer(custName, password, stockObj);
         this.stockData.customer.push(JSON.parse(JSON.stringify(customerObj)));
