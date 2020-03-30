@@ -43,7 +43,7 @@ class Createacc extends StockAccount {
     createAccount = async () => {
         let custName = input.question('Enter Account Holder Name : ');
         if (!nameRestriction.test(custName)) { //input validation of name 
-            this.custName = input.question("No special characters Invalid name! :");
+            this.custName = input.question("No special characters Invalid name! : ");
         }
         let password = input.question('Enter The password : ');
         let stockName = input.question('Enter Stock Name : ');
