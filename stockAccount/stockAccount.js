@@ -1,3 +1,13 @@
+/***************************************************************
+ * @Execution : default node : cmd> stockAccount.js
+ * @Purpose : To store and display stock account management
+ * @description : ­> Create Stock and Stock Portfolio Class holding the list of Stocks read
+from the input file. Have functions in the Class for buying,selling,print stocks and also to create account
+ * @overview : Stock account program 
+ * @author : Vishnu V Dev <vishnuvdev17@gmail.com>
+ * @version : 1.0
+ * @since : February 18 2020
+ ****************************************************************/
 const path = require('./stockAccountBL');
 const fs = require('fs').promises;
 let input = require('readline-sync')
