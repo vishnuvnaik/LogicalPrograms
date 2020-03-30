@@ -1,3 +1,8 @@
+/**
+* @description : Stock account management  
+* @param {}
+* @return Displays the stock account  
+**/
 const input = require('readline-sync')
 const fs = require('fs')
 numRestriction = /[0-9]/g;
