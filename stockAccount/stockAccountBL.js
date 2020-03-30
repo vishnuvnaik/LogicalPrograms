@@ -58,9 +58,9 @@ class Createacc extends StockAccount {
         if (!numRestriction.test(price)) { //input validation of numOfStock
             this.price = input.question("Enter digits only : ");
         }
-        let stockObj = new Stock(stockName, number, price);
-        let customerObj = new Customer(custName, password, stockObj);
-        this.stockData.customer.push(JSON.parse(JSON.stringify(customerObj)));
+        let newStock = new Stock(stockName, number, price);
+        let customerOb = new Customer(custName, password, newStock);
+        this.stockData.customer.push(JSON.parse(JSON.stringify(customerOb)));
         await fs.writeFileSync('stock.json', JSON.stringify(this.stockData));
         console.log("new account successfully created ")
     }
