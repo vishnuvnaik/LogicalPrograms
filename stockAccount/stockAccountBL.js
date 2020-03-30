@@ -86,6 +86,7 @@ class BuyStock extends StockAccount {
         let buyStock = new Stock(name, numOfStock, price);
         this.stockData.customer[custIndex].stock.push(JSON.parse(JSON.stringify(buyStock)));
         fs.writeFileSync('stock.json', JSON.stringify(this.stockData));
+        console.log('entry added ')
     }
 }
 class SellStock extends StockAccount {
@@ -93,11 +94,11 @@ class SellStock extends StockAccount {
         super()
     }
     sellStock(custIndex) {
-        console.log('----Available Stocks-----');
+        console.log('----Available Stocks----');
         for (let n in this.stockData.customer[custIndex].stock) {
             console.log(`${n} => ${this.stockData.customer[custIndex].stock[n].name}`);
         }
-        let nameStock = readLine.question('Enter name of the Stock for sell : ');
+        let nameStock = input.question('Enter name of the Stock for sell : ');
         for (let n in this.stockData.customer[custIndex].stock) {
             if (this.stockData.customer[custIndex].stock[n].name == nameStock) {
                 this.stockData.customer[custIndex].stock.splice(n, 1);
