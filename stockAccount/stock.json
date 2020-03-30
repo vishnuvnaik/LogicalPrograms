@@ -3,89 +3,14 @@
         {
             "name": "Vishnu",
             "password": "123456",
-            "stock": [
-                {
-                    "name": "Amazon",
-                    "number": 20,
-                    "price": 2000
-                }
-            ]
-        },
-        {
-            "name": "Anilu",
-            "password": "abcdef",
-            "stock": [
-                {
-                    "name": "Flipkart",
-                    "number": 20,
-                    "price": 3000
-                }
-            ]
+            "shares": 50,
+            "amount": 25000
         },
         {
             "name": "Dude",
             "password": "12345678",
-            "stock": [
-                {
-                    "name": "Nike",
-                    "number": 25,
-                    "price": 1000
-                },
-                {
-                    "name": "Birla",
-                    "number": 20,
-                    "price": 3000
-                }
-            ]
-        },
-        {
-            "name": "Hari",
-            "password": "hariii",
-            "stock": [
-                {
-                    "name": "Honda",
-                    "number": 24,
-                    "price": 537
-                }
-            ]
-        },
-        {
-            "name": "Anju",
-            "password": "anjuuuu",
-            "stock": [
-                {
-                    "name": "SCB",
-                    "number": 25,
-                    "price": 400
-                },
-                {
-                    "name": "SBI",
-                    "number": 15,
-                    "price": 3200
-                }
-            ]
-        },
-        {
-            "name": "Manoj",
-            "password": "789456",
-            "stock": [
-                {
-                    "name": "Amazon",
-                    "numOfStock": 14,
-                    "price": 500
-                }
-            ]
-        },
-        {
-            "name": "Dude",
-            "password": "7410",
-            "stock": [
-                {
-                    "name": "Nokia",
-                    "numOfStock": 14,
-                    "price": 200
-                }
-            ]
+            "shares": 25,
+            "amount": 35000
         }
     ]
 }
