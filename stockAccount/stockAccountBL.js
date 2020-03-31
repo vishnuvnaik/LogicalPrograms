@@ -78,7 +78,6 @@ class BuyStock extends StockAccount {
         const comData = fs.readFileSync('company.json');
         this.companyData = JSON.parse(comData);
         this.compData = this.companyData.company;
-        let compFound = 0;
         console.log('The company list ')
         console.log(this.compData);
         let Name = input.question("Enter name of company to buy shares:");
@@ -89,10 +88,10 @@ class BuyStock extends StockAccount {
         if (!numRestriction.test(NoOfShare)) { //input validation of numOfStock
             this.NoOfShare = input.question("Enter digits only : ");
         }
-        let isAvai = true;
+        let isAvailable = true;
         for (let i = 0; i < this.companyData.company.length; i++) {
             if (this.companyData.company[i].Name == Name) {
-                isAvai = true;
+                isAvailable = true;
                 let userShare = parseInt(Customer.shares);
                 let totalShare = NoOfShare - userShare;
                 Customer.shares = totalShare;
@@ -101,10 +100,28 @@ class BuyStock extends StockAccount {
                 let newData = fs.readFileSync('company.json', 'utf8')
                 let dataJson = JSON.parse(newData);
                 console.log(dataJson);
-                console.log('Successfully Updated');
+                console.log('Company json Successfully Updated');
+                let userInfo = custData.customer;
+                userInfo.forEach(function (customer) {
+                    if (this.customer.userName == userName) {
+                        let userShare = parseInt(this.custJson.customer.shares);
+                        let shareP = value;
+                        let add = userShare + num;
+                        customer.share = add;
+                        let total = shareP * num;
+                        let userAmount = (Number(customer.amount));
+                        let uAmount = userAmount - total;
+                        customer.amount = uAmount;
+                    }
+                });
+                fs.writeFileSync('stock.json', JSON.stringify(this.custJson));
+                let detail = JSON.parse(newData);
+                console.log(detail);
+                console.log('Successfully updated');
+                console.log();
             }
             else {
-                isAvai = false;
+                isAvailable = false;
             }
         }
     }
@@ -115,14 +132,17 @@ class SellStock extends StockAccount {
         super()
     }
     sellStock(custIndex) {
-        console.log('----Available Stocks----');
-        for (let n in this.stockData.customer[custIndex].stock) {
-            console.log(`${n} => ${this.stockData.customer[custIndex].stock[n].name}`);
-        }
+        const jsonData = fs.readFileSync('stock.json');
+        let custData = JSON.parse(jsonData);
+        const comData = fs.readFileSync('company.json');
+        this.companyData = JSON.parse(comData);
+        this.compData = this.companyData.company;
+        console.log('The company list ')
+        console.log(this.compData);
         let nameStock = input.question('Enter name of the Stock for sell : ');
-        for (let n in this.stockData.customer[custIndex].stock) {
-            if (this.stockData.customer[custIndex].stock[n].name == nameStock) {
-                this.stockData.customer[custIndex].stock.splice(n, 1);
+        for (let n in this.companyData.customer[custIndex].stock) {
+            if (this.companyData.company[custIndex].company[n].name == nameStock) {
+                this.companyData.customer[custIndex].stock.splice(n, 1);
             }
         }
         fs.writeFileSync('stock.json', JSON.stringify(this.stockData));
@@ -133,10 +153,8 @@ class PrintStock extends StockAccount {
         super()
     }
     printReport(indexOfCust) {
-        console.log(`** Report stock of ${this.custData.customer[indexOfCust].name}`);
-        for (let n in this.custData.customer[indexOfCust].shares) {
-            console.log(this.custData.customer[indexOfCust].shares[n]);
-        }
+        console.log(this.custData.customer)
+        console.log(this.companyData.company);
     }
 }
 module.exports = {
