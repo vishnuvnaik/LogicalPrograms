@@ -41,7 +41,7 @@ try {
                     stockBuy.buyStock(userName);
                     break;
                 case 2:
-                    stockSell.sellStock(result);
+                    stockSell.sellStock(userName);
                     break;
                 case 3:
                     stockPrint.printReport(result);
