@@ -13,7 +13,7 @@ const fs = require('fs').promises;
 let input = require('readline-sync')
 async () => { //reading json file using async await
     const jsonData = await fs.readFile('stock.json');
-    this.stockData = JSON.parse(jsonData);
+    this.custData = JSON.parse(jsonData);
 }
 try {
     let stockAcc = new path.StockAccount();
@@ -38,7 +38,7 @@ try {
                 "\n1 - buy Stock \n2 - Sell stock \n3 - print report \n4 - Exit \n"))
             switch (ch) {
                 case 1:
-                    stockBuy.buyStock(result);
+                    stockBuy.buyStock(userName);
                     break;
                 case 2:
                     stockSell.sellStock(result);
