@@ -75,6 +75,7 @@ class BuyStock extends StockAccount {
     buyStock(userName) {
         const jsonData = fs.readFileSync('stock.json');
         let custData = JSON.parse(jsonData);
+        let compFound = 0;
         const comData = fs.readFileSync('company.json');
         this.companyData = JSON.parse(comData);
         this.compData = this.companyData.company;
@@ -92,62 +93,91 @@ class BuyStock extends StockAccount {
         for (let i = 0; i < this.companyData.company.length; i++) {
             if (this.companyData.company[i].Name == Name) {
                 isAvailable = true;
-                let userShare = parseInt(Customer.shares);
-                let totalShare = NoOfShare - userShare;
-                Customer.shares = totalShare;
-                let value = parseInt(this.companyData.company[i].Price);
-                fs.writeFileSync('company.json', JSON.stringify(this.companyData));
-                let newData = fs.readFileSync('company.json', 'utf8')
-                let dataJson = JSON.parse(newData);
-                console.log(dataJson);
-                console.log('Company json Successfully Updated');
-                let userInfo = custData.customer;
-                userInfo.forEach(function (customer) {
-                    if (this.customer.userName == userName) {
-                        let userShare = parseInt(this.custJson.customer.shares);
-                        let shareP = value;
-                        let add = userShare + num;
-                        customer.share = add;
-                        let total = shareP * num;
-                        let userAmount = (Number(customer.amount));
-                        let uAmount = userAmount - total;
-                        customer.amount = uAmount;
-                    }
-                });
-                fs.writeFileSync('stock.json', JSON.stringify(this.custJson));
-                let detail = JSON.parse(newData);
-                console.log(detail);
-                console.log('Successfully updated');
-                console.log();
-            }
-            else {
-                isAvailable = false;
+                newObj.buyShare(Name, NoOfShare, userName);
+                compFound++;
             }
         }
+        if (compFound == 0) {
+
+            console.log("Enter valid data");
+        }
     }
+    buyShare(Name, NoOfShare, userName) {
+        let value;
+        let num = parseInt(NoOfShare);
+        let companyData = fs.readFileSync('company.json', 'utf8');
+        let compJson = JSON.parse(companyData);
+        let compInfo = compJson.company;
+        compInfo.forEach(function (company) {
+            if (Name == company.Name) {
+                var userShare = parseInt(Customer.shares);
+                var totalShare = NoOfShare - userShare;
+                Customer.shares = totalShare;
+                value = parseInt(company.Price);
+            }
+        });
+        fs.writeFileSync('company.json', JSON.stringify(compJson));
+        let newCompData = fs.readFileSync('company.json', 'utf8')
+        let dataJson = JSON.parse(newCompData);
+        console.log(dataJson);
+        console.log('company file Successfully Updated');
+        console.log();
+        let custData = fs.readFileSync('stock.json', 'utf8');
+        let infoCust = JSON.parse(custData);
+        let userInfo = infoCust.customer;
+        userInfo.forEach(function (customer) {
+            if (userName == customer.userName) {
+                let userShare = parseInt(customer.shares);
+                let shareP = value;
+                let add = userShare + num;
+                customer.share = add;
+                let total = shareP * num;
+                let userAmount = (Number(customer.amount));
+                let uAmount = userAmount - total;
+                customer.amount = uAmount;
+
+            }
+        });
+
+        fs.writeFileSync('stock.json', JSON.stringify(infoCust));
+        var newData = fs.readFileSync('stock.json')
+        let detail = JSON.parse(newData);
+        console.log(detail);
+        console.log('User file Successfully updated');
+        console.log();
+    }
+
 }
+
 
 class SellStock extends StockAccount {
     constructor() {
         super()
     }
-    sellStock(custIndex) {
-        const jsonData = fs.readFileSync('stock.json');
-        let custData = JSON.parse(jsonData);
-        const comData = fs.readFileSync('company.json');
-        this.companyData = JSON.parse(comData);
-        this.compData = this.companyData.company;
-        console.log('The company list ')
-        console.log(this.compData);
-        let nameStock = input.question('Enter name of the Stock for sell : ');
-        for (let n in this.companyData.customer[custIndex].stock) {
-            if (this.companyData.company[custIndex].company[n].name == nameStock) {
-                this.companyData.customer[custIndex].stock.splice(n, 1);
+    sellStock(userName) {
+        let stockSell = input.questionInt('enter the number of stock to sell ')
+        let pricePerShare = input.questionInt(' enter the price per share ');
+        let custData = fs.readFileSync('stock.json', 'utf8');
+        let infoCust = JSON.parse(custData);
+        let userInfo = infoCust.customer;
+        userInfo.forEach(function (customer) {
+            if (userName == customer.userName) {
+                let newShare = parseInt(customer.shares) - stockSell;
+                let newPrice = stockSell * pricePerShare;
+                customer.shares = newShare;
+                let newAmt = customer.amount - newPrice;
+                customer.amount = newAmt;
             }
-        }
-        fs.writeFileSync('stock.json', JSON.stringify(this.stockData));
+        });
+        fs.writeFileSync('stock.json', JSON.stringify(infoCust));
+        var newData = fs.readFileSync('stock.json')
+        let detail = JSON.parse(newData);
+        console.log(detail);
+        console.log('User file Successfully updated');
+        console.log();
     }
 }
+
 class PrintStock extends StockAccount {
     constructor() {
         super()
@@ -157,6 +187,7 @@ class PrintStock extends StockAccount {
         console.log(this.companyData.company);
     }
 }
+let newObj = new BuyStock;
 module.exports = {
     StockAccount, PrintStock, BuyStock, SellStock, Createacc
 }
