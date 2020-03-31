@@ -1,1 +1,24 @@
-{"company":[{"Name":"bmw","NoOfShare":38,"Price":10500},{"Name":"amazon","NoOfShare":30,"Price":20000},{"Name":"mercedes","NoOfShare":40,"Price":30000},{"Name":"flipkart","NoOfShare":60,"Price":5000}]}
+{
+    "company": [
+        {
+            "Name": "bmw",
+            "NoOfShare": 38,
+            "Price": 1050
+        },
+        {
+            "Name": "amazon",
+            "NoOfShare": 30,
+            "Price": 2000
+        },
+        {
+            "Name": "mercedes",
+            "NoOfShare": 40,
+            "Price": 3000
+        },
+        {
+            "Name": "flipkart",
+            "NoOfShare": 60,
+            "Price": 1000
+        }
+    ]
+}
