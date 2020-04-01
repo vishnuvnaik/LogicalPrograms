@@ -12,7 +12,7 @@ let searchDP = new path.Search;
 let bookApp = new path.Appointment;
 try {
     console.log("1. Add doctor \n2. Add patient\n3. Search doctor\n4. Search patient\n5. Take appointment\n6. Exit\n");
-    let ch = input.questionInt('enter your choice :- ')
+    let ch = input.questionInt('enter your choic')
     switch (ch) {
         case 1:
             addDoc.addDoctor();
