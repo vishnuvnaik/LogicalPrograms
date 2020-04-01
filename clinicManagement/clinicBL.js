@@ -56,7 +56,6 @@ class AddPatient {
     }
 }
 
-
 module.exports = {
     AddDoctor
 }
