@@ -1,0 +1,34 @@
+{
+    "doctors": [
+        {
+            "id": 1701,
+            "name": "Prathap",
+            "specialization": "Neuro",
+            "availability": "AM"
+        },
+        {
+            "id": 1703,
+            "name": "Anjali",
+            "specialization": "Pediatrics",
+            "availability": "PM"
+        }
+    ],
+    "patients": [
+        {
+            "id": 1001,
+            "name": "Dude",
+            "appointmentFrom": "Anju",
+            "phone": 7894561230,
+            "age": 50,
+            "onTheDayOf": 31
+        },
+        {
+            "id": 1002,
+            "name": "Vishnu",
+            "appointmentFrom": "Prathap",
+            "phone": 7410852074,
+            "age": 23,
+            "onTheDayOf": 30
+        }
+    ]
+}
