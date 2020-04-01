@@ -24,28 +24,28 @@
     ],
     "patients": [
         {
-            "pId": 1001,
-            "pName": "Dude",
-            "pPhone": 7894561230,
-            "pAge": 50
+            "patientId": 1001,
+            "patientName": "Dude",
+            "patientPhone": 7894561230,
+            "patientAge": 50
         },
         {
-            "pId": 1002,
-            "pName": "Vishnu",
-            "pPhone": 7410852074,
-            "pAge": 23
+            "patientId": 1002,
+            "patientName": "Vishnu",
+            "patientPhone": 7410852074,
+            "patientAge": 23
         },
         {
-            "pId": "Hari",
-            "pName": 2222,
-            "pPhone": 7410852063,
-            "pAge": 22
+            "patientId": "Hari",
+            "patientName": 2222,
+            "patientPhone": 7410852063,
+            "patientAge": 22
         }
     ],
     "clinicAppointment": [
         {
             "name": "Manoj",
-            "pName": "Dude",
+            "patientName": "Dude",
             "time": "AM"
         }
     ]

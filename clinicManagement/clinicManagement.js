@@ -1,6 +1,15 @@
+/***************************************************************
+ * @Execution : default node : cmd> clinicManagement.js
+ * @Purpose : To implement clinic management system
+ * @description : To add patients and doctors,search patients and doctors,book for appointment
+ * @overview : Clinic managament system
+ * @author : Vishnu V Dev <vishnuvdev17@gmail.com>
+ * @version : 1.0
+ * @since : February 18 2020
+ ****************************************************************/
 
 const path = require('./clinicBL')
-const promises = require('fs').promises
+const fs = require('fs').promises
 let input = require('readline-sync')
 async () => {
     const jsonData = await fs.readFile('clinic.json')

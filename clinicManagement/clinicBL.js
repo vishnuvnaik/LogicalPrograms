@@ -1,12 +1,14 @@
+/**
+* @description : Clinic Management system
+* @param {}
+* @return Displays the clinic management json file
+**/
+
 const fs = require('fs')
 const input = require('readline-sync')
-// const clinic = fs.readFileSync('clinic.json')
-// let clinicManage = JSON.parse(clinic)
-nameRestriction = /[A-z]/g; //for input validation of string
-contactRestriction = /[0-9]{6}/g;
-mobRes = /[0-9]{10}/g;
 
-class Doctor {
+class Doctor { //class for doctor 
+
     constructor(id, name, specialisation, availability, noOfAppointment) {
         this.id = id;
         this.name = name;
@@ -16,27 +18,34 @@ class Doctor {
 
     }
 }
-class Patient {
-    constructor(pId, pName, pPhone, pAge) {
-        this.pId = pId;
-        this.pName = pName;
-        this.pPhone = pPhone;
-        this.pAge = pAge;
+
+class Patient { //class for patient
+
+    constructor(patientId, patientName, patientPhone, patientAge) {
+        this.patientId = patientId;
+        this.patientName = patientName;
+        this.patientPhone = patientPhone;
+        this.patientAge = patientAge;
     }
 }
-class Appoint {
-    constructor(name, pName, time) {
+
+class Appoint { //class for doctors appointment
+
+    constructor(name, patientName, time) {
         this.name = name;
-        this.pName = pName;
+        this.patientName = patientName;
         this.time = time;
     }
 }
+
 class AddDoctor {
+
     constructor() {
         const clinic = fs.readFileSync('clinic.json')
         this.clinicManage = JSON.parse(clinic)
     }
-    addDoctor() {
+
+    addDoctor() { //function to add doctor
         try {
             let name = input.question("Enter name of the doctor:");
             if (!isNaN(name)) throw "enter a valid input";
@@ -57,30 +66,36 @@ class AddDoctor {
         }
     }
 }
+
 class AddPatient {
+
     constructor() {
         const clinic = fs.readFileSync('clinic.json')
         this.clinicManage = JSON.parse(clinic)
     }
-    addPatient() {
-        let pName = input.question("Enter name of the patient:");
-        if (!isNaN(pName)) throw "enter a valid input";
-        let pId = input.questionInt("Enter patient's id:");
-        if (isNaN(pId)) throw "enter a valid input";
-        let pAge = input.questionInt("Enter patient's age :");
-        let pPhone = input.questionInt("Enter the phone num of patient");
-        let patientObj = new Patient(pName, pId, pPhone, pAge)
+
+    addPatient() { //function to add patients
+        let patientName = input.question("Enter name of the patient:");
+        if (!isNaN(patientName)) throw "enter a valid input";
+        let patientId = input.questionInt("Enter patient's id:");
+        if (isNaN(patientId)) throw "enter a valid input";
+        let patientAge = input.questionInt("Enter patient's age :");
+        let patientPhone = input.questionInt("Enter the phone num of patient");
+        let patientObj = new Patient(patientName, patientId, patientPhone, patientAge)
         this.clinicManage.patients.push(JSON.parse(JSON.stringify(patientObj)));
         fs.writeFileSync('clinic.json', JSON.stringify(this.clinicManage));
         console.log('entry added ')
     }
 }
-class Search {
+
+class Search { //class for searching of doctors and patients
     constructor() {
         const clinic = fs.readFileSync('clinic.json')
         this.clinicManage = JSON.parse(clinic)
     }
-    searchDoc() {
+
+    searchDoc() { //function to search for doctor 
+
         console.log(' ----- search for a doctor ----- ')
         let search = input.question(' enter the search keyword name/availability/specialisation')
         console.log("1. Search by name\n2. Search by Id\n3. Search by speciality\n4. Search by availability\n");
@@ -110,10 +125,11 @@ class Search {
                         console.log(this.clinicManage.doctors[i]);
                     }
                 }
-
         }
     }
-    searchPatient() {
+
+    searchPatient() { //function to search patients
+
         console.log(' ----- search for a patient ----- ')
         let search = input.question(' enter the search keyword name/id/phone num')
         console.log("1. Search by name\n2. Search by Id\n3. Search by phone num \n");
@@ -121,40 +137,42 @@ class Search {
         switch (ch) {
             case 1:
                 for (let i = 0; i < this.clinicManage.patients.length; i++) {
-                    if (this.clinicManage.patients[i].name == search) {
+                    if (this.clinicManage.patients[i].patientName == search) {
                         console.log(this.clinicManage.patients[i]);
                     }
                 }
             case 2:
                 for (let i = 0; i < this.clinicManage.patients.length; i++) {
-                    if (this.clinicManage.patients[i].id == search) {
+                    if (this.clinicManage.patients[i].patientId == search) {
                         console.log(this.clinicManage.patients[i]);
                     }
                 }
             case 3:
                 for (let i = 0; i < this.clinicManage.patients.length; i++) {
-                    if (this.clinicManage.patients[i].pPhone == search) {
+                    if (this.clinicManage.patients[i].patientPhone == search) {
                         console.log(this.clinicManage.patients[i]);
                     }
                 }
         }
     }
 }
-class Appointment {
+
+class Appointment { //class for booking an appointment
     constructor() {
         const clinic = fs.readFileSync('clinic.json')
         this.clinicManage = JSON.parse(clinic)
     }
-    bookAppointment() {
+
+    bookAppointment() { //function for appointment booking 
         try {
             let name = input.question(' enter the name of doctor for appointment')
             if (!isNaN(name)) throw "enter a valid input";
-            let pName = input.question(' enter the name of patient ')
-            if (!isNaN(pName)) throw "enter a valid input";
+            let patientName = input.question(' enter the name of patient ')
+            if (!isNaN(patientName)) throw "enter a valid input";
             let time = input.question(" AM PM or Both")
             if (!isNaN(time)) throw "enter a valid input";
             let i = -1
-            for (let j = 0; j < this.clinicManage.doctors.length; j++) {
+            for (let j = 0; j < this.clinicManage.doctors.length; j++) { //loop to check the doctors name with entered name
                 if (this.clinicManage.doctors[j].name == name) {
                     i = j;
                 }
@@ -162,7 +180,7 @@ class Appointment {
             if (i != -1) {
                 if (this.clinicManage.doctors[i].noOfAppointment < 5) {
                     if (this.clinicManage.doctors[i].availability == time) {
-                        let appObj = new Appoint(name, pName, time)
+                        let appObj = new Appoint(name, patientName, time)
                         this.clinicManage.clinicAppointment.push(JSON.parse(JSON.stringify(appObj)));
                         fs.writeFileSync('clinic.json', JSON.stringify(this.clinicManage));
                         this.clinicManage.doctors[i].noOfAppointment++;
@@ -186,6 +204,7 @@ class Appointment {
         }
     }
 }
+
 module.exports = {
     AddDoctor, AddPatient, Search, Appointment
 }
