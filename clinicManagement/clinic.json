@@ -15,11 +15,11 @@
             "noOfAppointment": 2
         },
         {
-            "id": "Manoj",
-            "name": "111",
+            "id": 111,
+            "name": "Manoj",
             "specialisation": "Neuro",
             "availability": "AM",
-            "noOfAppointment": 0
+            "noOfAppointment": 1
         }
     ],
     "patients": [
@@ -34,6 +34,19 @@
             "pName": "Vishnu",
             "pPhone": 7410852074,
             "pAge": 23
+        },
+        {
+            "pId": "Hari",
+            "pName": 2222,
+            "pPhone": 7410852063,
+            "pAge": 22
+        }
+    ],
+    "clinicAppointment": [
+        {
+            "name": "Manoj",
+            "pName": "Dude",
+            "time": "AM"
         }
     ]
 }
