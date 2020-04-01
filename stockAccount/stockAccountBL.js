@@ -130,7 +130,7 @@ class BuyStock extends StockAccount {
                 let userShare = parseInt(customer.shares);
                 let shareP = value;
                 let add = userShare + num;
-                customer.share = add;
+                customer.shares = add;
                 let total = shareP * num;
                 let userAmount = (Number(customer.amount));
                 let uAmount = userAmount - total;
@@ -148,8 +148,6 @@ class BuyStock extends StockAccount {
     }
 
 }
-
-
 class SellStock extends StockAccount {
     constructor() {
         super()
@@ -177,7 +175,6 @@ class SellStock extends StockAccount {
         console.log();
     }
 }
-
 class PrintStock extends StockAccount {
     constructor() {
         super()
