@@ -68,6 +68,45 @@ class AddPatient {
         console.log('entry added ')
     }
 }
+class SearchDoctor {
+    constructor() {
+        const clinic = fs.readFileSync('clinic.json')
+        this.clinicManage = JSON.parse(clinic)
+    }
+    searchDoc() {
+        console.log(' ----- search for a doctor ----- ')
+        let search = input.question(' enter the search keyword name/availability/specialisation')
+        console.log("1. Search by name\n2. Search by Id\n3. Search by speciality\n4. Search by availability\n");
+        var ch = input.questionInt("Enter your choice:");
+        switch (ch) {
+            case 1:
+                for (let i = 0; i < this.clinicManage.doctors.length; i++) {
+                    if (this.clinicManage.doctors[i].name == search) {
+                        console.log(this.clinicManage.doctors[i]);
+                    }
+                }
+            case 2:
+                for (let i = 0; i < this.clinicManage.doctors.length; i++) {
+                    if (this.clinicManage.doctors[i].id == search) {
+                        console.log(this.clinicManage.doctors[i]);
+                    }
+                }
+            case 3:
+                for (let i = 0; i < this.clinicManage.doctors.length; i++) {
+                    if (this.clinicManage.doctors[i].specialization == search) {
+                        console.log(this.clinicManage.doctors[i]);
+                    }
+                }
+            case 4:
+                for (let i = 0; i < this.clinicManage.doctors.length; i++) {
+                    if (this.clinicManage.doctors[i].availability == search) {
+                        console.log(this.clinicManage.doctors[i]);
+                    }
+                }
+
+        }
+    }
+}
 module.exports = {
-    AddDoctor, AddPatient
+    AddDoctor, AddPatient, SearchDoctor
 }
