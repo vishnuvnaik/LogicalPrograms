@@ -43,7 +43,6 @@ class AddDoctor {
             let newObj = new Doctor(name, id, specialisation, availability, noOfAppointment)
             this.clinicManage.doctors.push(JSON.parse(JSON.stringify(newObj)));
             fs.writeFileSync('clinic.json', JSON.stringify(this.clinicManage));
-
         }
         catch (err) {
             console.log("ERROR  " + err);
