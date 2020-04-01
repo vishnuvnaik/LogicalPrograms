@@ -24,6 +24,13 @@ class Patient {
         this.pAge = pAge;
     }
 }
+class Appoint {
+    constructor(name, pName, time) {
+        this.name = name;
+        this.pName = pName;
+        this.time = time;
+    }
+}
 class AddDoctor {
     constructor() {
         const clinic = fs.readFileSync('clinic.json')
@@ -133,6 +140,52 @@ class Search {
         }
     }
 }
+class Appointment {
+    constructor() {
+        const clinic = fs.readFileSync('clinic.json')
+        this.clinicManage = JSON.parse(clinic)
+    }
+    bookAppointment() {
+        try {
+            let name = input.question(' enter the name of doctor for appointment')
+            if (!isNaN(name)) throw "enter a valid input";
+            let pName = input.question(' enter the name of patient ')
+            if (!isNaN(pName)) throw "enter a valid input";
+            let time = input.question(" AM PM or Both")
+            if (!isNaN(time)) throw "enter a valid input";
+            let i = -1
+            for (let j = 0; j < this.clinicManage.doctors.length; j++) {
+                if (this.clinicManage.doctors[j].name == name) {
+                    i = j;
+                }
+            }
+            if (i != -1) {
+                if (this.clinicManage.doctors[i].noOfAppointment < 5) {
+                    if (this.clinicManage.doctors[i].availability == time) {
+                        let appObj = new Appoint(name, pName, time)
+                        this.clinicManage.clinicAppointment.push(JSON.parse(JSON.stringify(appObj)));
+                        fs.writeFileSync('clinic.json', JSON.stringify(this.clinicManage));
+                        this.clinicManage.doctors[i].noOfAppointment++;
+                        console.log("Appointment booked")
+                    }
+                    else {
+                        console.log("Doctor isn't available in this time")
+                    }
+                }
+                else {
+                    console.log('doctors appointments are full ')
+                }
+            }
+            else {
+                console.log(" doctor not found ")
+            }
+            fs.writeFileSync('clinic.json', JSON.stringify(this.clinicManage))
+        }
+        catch (err) {
+            console.log(err)
+        }
+    }
+}
 module.exports = {
-    AddDoctor, AddPatient, Search
+    AddDoctor, AddPatient, Search, Appointment
 }
