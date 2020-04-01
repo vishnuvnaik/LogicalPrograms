@@ -5,7 +5,7 @@
 **/
 const input = require('readline-sync')
 const fs = require('fs')
-numRestriction = /[0-9]/g;
+numRestriction = /[0-9]/g; //regex for input validation
 nameRestriction = /[A-z]/g;
 class Customer {
     constructor(userName, password, shares, amount) {
@@ -13,13 +13,6 @@ class Customer {
         this.password = password;
         this.shares = shares;
         this.amount = amount;
-    }
-}
-class Company {
-    constructor(Name, NoOfShare, Price) {
-        this.Name = Name;
-        this.NoOfShare = NoOfShare;
-        this.Price = Price;
     }
 }
 class StockAccount {
@@ -30,6 +23,7 @@ class StockAccount {
         this.companyData = JSON.parse(comData);
         this.compData = this.companyData.company;
     }
+
     checkAccount(name, password) {
         let position = -1;
         for (let i in this.custData.customer) {
@@ -40,11 +34,13 @@ class StockAccount {
         return position;
     }
 }
+
 class Createacc extends StockAccount {
     constructor() {
         super()
     }
-    createAccount = async () => {
+
+    createAccount = async () => { //function to create new account for customer
         let custName = input.question('Enter Account Holder Name : ');
         if (!nameRestriction.test(custName)) { //input validation of name 
             this.custName = input.question("No special characters Invalid name! : ");
@@ -55,11 +51,11 @@ class Createacc extends StockAccount {
             this.stockName = input.question("No special characters Invalid name! :");
         }
         let shares = input.questionInt('Enter Numbers Of Shares : ');
-        if (!numRestriction.test(shares)) { //input validation of numOfStock
+        if (!numRestriction.test(shares)) { //input validation of shares
             this.shares = input.question("Enter digits only : ");
         }
         let amount = input.questionInt('Enter the amount in hand : ');
-        if (!numRestriction.test(amount)) { //input validation of numOfStock
+        if (!numRestriction.test(amount)) { //input validation of amount
             this.amount = input.question("Enter digits only : ");
         }
         let customerOb = new Customer(custName, password, shares, amount);
@@ -68,11 +64,13 @@ class Createacc extends StockAccount {
         console.log("new account successfully created ")
     }
 }
-class BuyStock extends StockAccount {
+
+class BuyStock extends StockAccount { //class for buying a stock
     constructor() {
         super()
     }
-    buyStock(userName) {
+
+    buyStock(userName) { //function to buystock for the customer
         const jsonData = fs.readFileSync('stock.json');
         let custData = JSON.parse(jsonData);
         let compFound = 0;
@@ -102,7 +100,8 @@ class BuyStock extends StockAccount {
             console.log("Enter valid data");
         }
     }
-    buyShare(Name, NoOfShare, userName) {
+
+    buyShare(Name, NoOfShare, userName) { //function for buying the stock 
         let value;
         let num = parseInt(NoOfShare);
         let companyData = fs.readFileSync('company.json', 'utf8');
@@ -148,11 +147,14 @@ class BuyStock extends StockAccount {
     }
 
 }
+
 class SellStock extends StockAccount {
+
     constructor() {
         super()
     }
-    sellStock(userName) {
+
+    sellStock(userName) { //function to sell the stock
         let stockSell = input.questionInt('enter the number of stock to sell ')
         let pricePerShare = input.questionInt(' enter the price per share ');
         let custData = fs.readFileSync('stock.json', 'utf8');
@@ -175,15 +177,18 @@ class SellStock extends StockAccount {
         console.log();
     }
 }
+
 class PrintStock extends StockAccount {
     constructor() {
         super()
     }
-    printReport(indexOfCust) {
+
+    printReport() {
         console.log(this.custData.customer)
         console.log(this.companyData.company);
     }
 }
+
 let newObj = new BuyStock;
 module.exports = {
     StockAccount, PrintStock, BuyStock, SellStock, Createacc
