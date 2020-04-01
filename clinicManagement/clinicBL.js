@@ -33,7 +33,7 @@ class AddDoctor {
         try {
             let name = input.question("Enter name of the doctor:");
             if (!isNaN(name)) throw "enter a valid input";
-            let id = input.question("Enter doctor's id:");
+            let id = input.questionInt("Enter doctor's id:");
             if (isNaN(id)) throw "enter a valid input";
             let specialisation = input.question("Enter doctor's speciality:");
             if (!isNaN(specialisation)) throw "enter a valid input";
@@ -43,9 +43,10 @@ class AddDoctor {
             let newObj = new Doctor(name, id, specialisation, availability, noOfAppointment)
             this.clinicManage.doctors.push(JSON.parse(JSON.stringify(newObj)));
             fs.writeFileSync('clinic.json', JSON.stringify(this.clinicManage));
+            console.log(' entry added ')
         }
         catch (err) {
-            console.log("ERROR  " + err);
+            console.log(err);
         }
     }
 }
@@ -54,8 +55,19 @@ class AddPatient {
         const clinic = fs.readFileSync('clinic.json')
         this.clinicManage = JSON.parse(clinic)
     }
+    addPatient() {
+        let pName = input.question("Enter name of the patient:");
+        if (!isNaN(pName)) throw "enter a valid input";
+        let pId = input.questionInt("Enter patient's id:");
+        if (isNaN(pId)) throw "enter a valid input";
+        let pAge = input.questionInt("Enter patient's age :");
+        let pPhone = input.questionInt("Enter the phone num of patient");
+        let patientObj = new Patient(pName, pId, pPhone, pAge)
+        this.clinicManage.patients.push(JSON.parse(JSON.stringify(patientObj)));
+        fs.writeFileSync('clinic.json', JSON.stringify(this.clinicManage));
+        console.log('entry added ')
+    }
 }
-
 module.exports = {
-    AddDoctor
+    AddDoctor, AddPatient
 }
