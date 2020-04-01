@@ -68,7 +68,7 @@ class AddPatient {
         console.log('entry added ')
     }
 }
-class SearchDoctor {
+class Search {
     constructor() {
         const clinic = fs.readFileSync('clinic.json')
         this.clinicManage = JSON.parse(clinic)
@@ -106,7 +106,33 @@ class SearchDoctor {
 
         }
     }
+    searchPatient() {
+        console.log(' ----- search for a patient ----- ')
+        let search = input.question(' enter the search keyword name/id/phone num')
+        console.log("1. Search by name\n2. Search by Id\n3. Search by phone num \n");
+        var ch = input.questionInt("Enter your choice:");
+        switch (ch) {
+            case 1:
+                for (let i = 0; i < this.clinicManage.patients.length; i++) {
+                    if (this.clinicManage.patients[i].name == search) {
+                        console.log(this.clinicManage.patients[i]);
+                    }
+                }
+            case 2:
+                for (let i = 0; i < this.clinicManage.patients.length; i++) {
+                    if (this.clinicManage.patients[i].id == search) {
+                        console.log(this.clinicManage.patients[i]);
+                    }
+                }
+            case 3:
+                for (let i = 0; i < this.clinicManage.patients.length; i++) {
+                    if (this.clinicManage.patients[i].pPhone == search) {
+                        console.log(this.clinicManage.patients[i]);
+                    }
+                }
+        }
+    }
 }
 module.exports = {
-    AddDoctor, AddPatient, SearchDoctor
+    AddDoctor, AddPatient, Search
 }
