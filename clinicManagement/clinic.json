@@ -4,31 +4,36 @@
             "id": 1701,
             "name": "Prathap",
             "specialization": "Neuro",
-            "availability": "AM"
+            "availability": "AM",
+            "noOfAppointment": 2
         },
         {
             "id": 1703,
             "name": "Anjali",
             "specialization": "Pediatrics",
-            "availability": "PM"
+            "availability": "PM",
+            "noOfAppointment": 2
+        },
+        {
+            "id": "Manoj",
+            "name": "111",
+            "specialisation": "Neuro",
+            "availability": "AM",
+            "noOfAppointment": 0
         }
     ],
     "patients": [
         {
-            "id": 1001,
-            "name": "Dude",
-            "appointmentFrom": "Anju",
-            "phone": 7894561230,
-            "age": 50,
-            "onTheDayOf": 31
+            "pId": 1001,
+            "pName": "Dude",
+            "pPhone": 7894561230,
+            "pAge": 50
         },
         {
-            "id": 1002,
-            "name": "Vishnu",
-            "appointmentFrom": "Prathap",
-            "phone": 7410852074,
-            "age": 23,
-            "onTheDayOf": 30
+            "pId": 1002,
+            "pName": "Vishnu",
+            "pPhone": 7410852074,
+            "pAge": 23
         }
     ]
 }
