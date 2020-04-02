@@ -19,7 +19,14 @@
             "name": "Manoj",
             "specialisation": "Neuro",
             "availability": "AM",
-            "noOfAppointment": 1
+            "noOfAppointment": 2
+        },
+        {
+            "id": "Aksh",
+            "name": 1450,
+            "specialisation": "Neuro",
+            "availability": "AM",
+            "noOfAppointment": 0
         }
     ],
     "patients": [
@@ -43,6 +50,11 @@
         }
     ],
     "clinicAppointment": [
+        {
+            "name": "Manoj",
+            "patientName": "Dude",
+            "time": "AM"
+        },
         {
             "name": "Manoj",
             "patientName": "Dude",
