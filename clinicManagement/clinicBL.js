@@ -75,16 +75,22 @@ class AddPatient {
     }
 
     addPatient() { //function to add patients
-        let patientName = input.question("Enter name of the patient:");
-        if (!isNaN(patientName)) throw "enter a valid input";
-        let patientId = input.questionInt("Enter patient's id:");
-        if (isNaN(patientId)) throw "enter a valid input";
-        let patientAge = input.questionInt("Enter patient's age :");
-        let patientPhone = input.questionInt("Enter the phone num of patient");
-        let patientObj = new Patient(patientName, patientId, patientPhone, patientAge)
-        this.clinicManage.patients.push(JSON.parse(JSON.stringify(patientObj)));
-        fs.writeFileSync('clinic.json', JSON.stringify(this.clinicManage));
-        console.log('entry added ')
+        try {
+            let patientName = input.question("Enter name of the patient:");
+            if (!isNaN(patientName)) throw "enter a valid input";
+            let patientId = input.questionInt("Enter patient's id:");
+            if (isNaN(patientId)) throw "enter a valid input";
+            let patientAge = input.questionInt("Enter patient's age :");
+            let patientPhone = input.questionInt("Enter the phone num of patient");
+            let patientObj = new Patient(patientName, patientId, patientPhone, patientAge)
+            this.clinicManage.patients.push(JSON.parse(JSON.stringify(patientObj)));
+            fs.writeFileSync('clinic.json', JSON.stringify(this.clinicManage));
+            console.log('entry added ')
+        }
+        catch (err) {
+            console.log(err)
+
+        }
     }
 }
 
@@ -95,64 +101,73 @@ class Search { //class for searching of doctors and patients
     }
 
     searchDoc() { //function to search for doctor 
-
-        console.log(' ----- search for a doctor ----- ')
-        let search = input.question(' enter the search keyword name/availability/specialisation')
-        console.log("1. Search by name\n2. Search by Id\n3. Search by speciality\n4. Search by availability\n");
-        var ch = input.questionInt("Enter your choice:");
-        switch (ch) {
-            case 1:
-                for (let i = 0; i < this.clinicManage.doctors.length; i++) {
-                    if (this.clinicManage.doctors[i].name == search) {
-                        console.log(this.clinicManage.doctors[i]);
+        try {
+            console.log(' ----- search for a doctor ----- ')
+            let search = input.question(' enter the search keyword name/availability/specialisation')
+            console.log("1. Search by name\n2. Search by Id\n3. Search by speciality\n4. Search by availability\n");
+            var ch = input.questionInt("Enter your choice:");
+            switch (ch) {
+                case 1:
+                    for (let i = 0; i < this.clinicManage.doctors.length; i++) {
+                        if (this.clinicManage.doctors[i].name == search) {
+                            console.log(this.clinicManage.doctors[i]);
+                        }
                     }
-                }
-            case 2:
-                for (let i = 0; i < this.clinicManage.doctors.length; i++) {
-                    if (this.clinicManage.doctors[i].id == search) {
-                        console.log(this.clinicManage.doctors[i]);
+                case 2:
+                    for (let i = 0; i < this.clinicManage.doctors.length; i++) {
+                        if (this.clinicManage.doctors[i].id == search) {
+                            console.log(this.clinicManage.doctors[i]);
+                        }
                     }
-                }
-            case 3:
-                for (let i = 0; i < this.clinicManage.doctors.length; i++) {
-                    if (this.clinicManage.doctors[i].specialization == search) {
-                        console.log(this.clinicManage.doctors[i]);
+                case 3:
+                    for (let i = 0; i < this.clinicManage.doctors.length; i++) {
+                        if (this.clinicManage.doctors[i].specialization == search) {
+                            console.log(this.clinicManage.doctors[i]);
+                        }
                     }
-                }
-            case 4:
-                for (let i = 0; i < this.clinicManage.doctors.length; i++) {
-                    if (this.clinicManage.doctors[i].availability == search) {
-                        console.log(this.clinicManage.doctors[i]);
+                case 4:
+                    for (let i = 0; i < this.clinicManage.doctors.length; i++) {
+                        if (this.clinicManage.doctors[i].availability == search) {
+                            console.log(this.clinicManage.doctors[i]);
+                        }
                     }
-                }
+            }
+        }
+        catch (err) {
+            console.log(err)
         }
     }
 
-    searchPatient() { //function to search patients
 
-        console.log(' ----- search for a patient ----- ')
-        let search = input.question(' enter the search keyword name/id/phone num')
-        console.log("1. Search by name\n2. Search by Id\n3. Search by phone num \n");
-        var ch = input.questionInt("Enter your choice:");
-        switch (ch) {
-            case 1:
-                for (let i = 0; i < this.clinicManage.patients.length; i++) {
-                    if (this.clinicManage.patients[i].patientName == search) {
-                        console.log(this.clinicManage.patients[i]);
+    searchPatient() { //function to search patients
+        try {
+            console.log(' ----- search for a patient ----- ')
+            let search = input.question(' enter the search keyword name/id/phone num')
+            console.log("1. Search by name\n2. Search by Id\n3. Search by phone num \n");
+            var ch = input.questionInt("Enter your choice:");
+            switch (ch) {
+                case 1:
+                    for (let i = 0; i < this.clinicManage.patients.length; i++) {
+                        if (this.clinicManage.patients[i].patientName == search) {
+                            console.log(this.clinicManage.patients[i]);
+                        }
                     }
-                }
-            case 2:
-                for (let i = 0; i < this.clinicManage.patients.length; i++) {
-                    if (this.clinicManage.patients[i].patientId == search) {
-                        console.log(this.clinicManage.patients[i]);
+                case 2:
+                    for (let i = 0; i < this.clinicManage.patients.length; i++) {
+                        if (this.clinicManage.patients[i].patientId == search) {
+                            console.log(this.clinicManage.patients[i]);
+                        }
                     }
-                }
-            case 3:
-                for (let i = 0; i < this.clinicManage.patients.length; i++) {
-                    if (this.clinicManage.patients[i].patientPhone == search) {
-                        console.log(this.clinicManage.patients[i]);
+                case 3:
+                    for (let i = 0; i < this.clinicManage.patients.length; i++) {
+                        if (this.clinicManage.patients[i].patientPhone == search) {
+                            console.log(this.clinicManage.patients[i]);
+                        }
                     }
-                }
+            }
+        }
+        catch (err) {
+            console.log(err)
         }
     }
 }
